@@ -9,6 +9,8 @@
    3. 选择中文简体
    4. 安装完成重启VS Code
 4. 安装C/C++插件，安装完重启。
+   
+
 ### 安装MinGW编译器[RefLink](https://blog.csdn.net/qq_34735535/article/details/53909183)
 1. 运行
 2. 选择All Packages，勾选
@@ -19,6 +21,8 @@
    1. msys-base bin
    2. msys-vim bin
 4. apply changes
+
+
 ### 编写C++程序并运行[RefLink](https://zhuanlan.zhihu.com/p/77074009)
 1. 打开一个文件夹（不要包含中文路径）
 2. 菜单栏——查看——终端
