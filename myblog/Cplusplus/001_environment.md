@@ -32,3 +32,24 @@
 6. 第一次执行编译任务前，需要配置这个任务。选择菜单栏【终端】→【配置任务…】
 7. 为了执行这个编译任务，先打开要编译的代码文件，然后选择菜单栏【终端】→【运行生成任务】
 8. 在下方的终端输入`.\hello.exe`.
+
+
+### 一个简单的测试程序`Demo.cpp`
+```C++
+#include <stdio.h>
+
+int max(int x,int y)
+{
+    int t;
+    t=x>y?x:y;
+    return t;
+}
+
+int main()
+{
+    int a,b,c;
+    scanf("%d%d%d",&a,&b,&c);
+    int maxs=max(a,max(b,c));
+    printf("%d",maxs);
+}
+``` 
