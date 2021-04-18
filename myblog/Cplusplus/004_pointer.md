@@ -252,10 +252,275 @@ Value of var[2] = 200
 
 ## 指针 vs 数组
 
+指针和数组是密切相关的。事实上，指针和数组在很多情况下是可以互换的。例如，一个指向数组开头的指针，可以通过使用指针的算术运算或数组索引来访问数组。
+[demo4.cpp](./004_pointer/demo4.cpp)
+[demo5.cpp](./004_pointer/demo5.cpp)
+
+然而，指针和数组并不是完全互换的.`var 是一个指向数组开头的常量，不能作为左值。`
+```C++
+#include <iostream>
+ 
+using namespace std;
+const int MAX = 3;
+ 
+int main ()
+{
+   int  var[MAX] = {10, 100, 200};
+ 
+   for (int i = 0; i < MAX; i++)
+   {
+      *var = i;    // 这是正确的语法
+      var++;       // 这是不正确的
+   }
+   return 0;
+}
+```
+
 ## 指针数组
+
+可能有一种情况，想要让数组存储指向 int 或 char 或其他数据类型的指针。下面是一个指向整数的指针数组的声明：
+
+`int *ptr[MAX];`
+
+在这里，把 ptr 声明为一个数组，由 MAX 个整数指针组成。因此，ptr 中的每个元素，都是一个指向 int 值的指针。下面的实例用到了三个整数，它们将存储在一个指针数组中，如下所示：
+
+[demo7.cpp](./004_pointer/demo7.cpp)
+```C++
+#include <iostream>
+ 
+using namespace std;
+const int MAX = 3;
+ 
+int main ()
+{
+   int  var[MAX] = {10, 100, 200};
+   int *ptr[MAX];
+ 
+   for (int i = 0; i < MAX; i++)
+   {
+      ptr[i] = &var[i]; // 赋值为整数的地址
+   }
+   for (int i = 0; i < MAX; i++)
+   {
+      cout << "Value of var[" << i << "] = ";
+      cout << *ptr[i] << endl;
+   }
+   return 0;
+}
+```
+
+执行结果：
+```
+Value of var[0] = 10
+Value of var[1] = 100
+Value of var[2] = 200
+```
 
 ## 指向指针的指针
 
+指向指针的指针是一种多级间接寻址的形式，或者说是一个指针链。
+
+指针的指针就是将指针的地址存放在另一个指针里面。
+
+通常，一个指针包含一个变量的地址。当我们定义一个指向指针的指针时，第一个指针包含了第二个指针的地址，第二个指针指向包含实际值的位置。
+
+![指向指针的指针](./images/004_001.png)
+
+一个指向指针的指针变量必须如下声明，即在变量名前放置两个星号。例如，下面声明了一个指向 int 类型指针的指针：
+
+`int **var;`
+
+当一个目标值被一个指针间接指向到另一个指针时，访问这个值需要使用两个星号运算符，如下面实例所示：
+
+[demo8.cpp](./004_pointer/demo8.cpp)
+```C++
+
+#include <iostream>
+ 
+using namespace std;
+ 
+int main ()
+{
+    int  var;
+    int  *ptr;
+    int  **pptr;
+ 
+    var = 3000;
+ 
+    // 获取 var 的地址
+    ptr = &var;
+ 
+    // 使用运算符 & 获取 ptr 的地址
+    pptr = &ptr;
+ 
+    // 使用 pptr 获取值
+    cout << "var 值为 :" << var << endl;
+    cout << "*ptr 值为:" << *ptr << endl;
+    cout << "**pptr 值为:" << **pptr << endl;
+ 
+    return 0;
+}
+```
+
+执行结果：
+```
+var 值为 :3000
+*ptr 值为:3000
+**pptr 值为:3000
+```
+
 ## 传递指针给函数
 
+C++ 允许传递指针给函数，只需要简单地声明函数参数为指针类型即可。
+
+下面的实例中，传递一个无符号的 long 型指针给函数，并在函数内改变这个值：
+
+[demo9.cpp](./004_pointer/demo9.cpp)
+```C++
+#include <iostream>
+#include <ctime>
+ 
+using namespace std;
+ 
+// 在写函数时应习惯性的先声明函数，然后在定义函数
+void getSeconds(unsigned long *par);
+ 
+int main ()
+{
+   unsigned long sec;
+ 
+ 
+   getSeconds( &sec );
+ 
+   // 输出实际值
+   cout << "Number of seconds :" << sec << endl;
+ 
+   return 0;
+}
+ 
+void getSeconds(unsigned long *par)
+{
+   // 获取当前的秒数
+   *par = time( NULL );
+   return;
+}
+}
+```
+
+执行结果：
+```
+Number of seconds :1618746666
+```
+
+能接受指针作为参数的函数，也能接受数组作为参数，如下所示：
+[demo10.cpp](./004_pointer/demo10.cpp)
+```C++
+
+#include <iostream>
+using namespace std;
+ 
+// 函数声明
+double getAverage(int *arr, int size);
+ 
+int main ()
+{
+   // 带有 5 个元素的整型数组
+   int balance[5] = {1000, 2, 3, 17, 50};
+   double avg;
+ 
+   // 传递一个指向数组的指针作为参数
+   avg = getAverage( balance, 5 ) ;
+ 
+   // 输出返回值
+   cout << "Average value is: " << avg << endl; 
+    
+   return 0;
+}
+ 
+double getAverage(int *arr, int size)
+{
+  int    i, sum = 0;       
+  double avg;          
+ 
+  for (i = 0; i < size; ++i)
+  {
+    sum += arr[i];
+   }
+ 
+  avg = double(sum) / size;
+ 
+  return avg;
+}
+```
+
+执行结果：
+```
+Average value is: 214.4
+```
+
 ## 从函数返回指针
+
+C++ 不支持在函数外返回局部变量的地址，除非定义局部变量为 static变量。
+
+现在，让我们来看下面的函数，它会生成 10 个随机数，并使用表示指针的数组名（即第一个数组元素的地址）来返回它们，具体如下：
+[demo11.cpp](./004_pointer/demo11.cpp)
+```C++
+#include <iostream>
+using namespace std;
+ 
+// 函数声明
+double getAverage(int *arr, int size);
+ 
+int main ()
+{
+   // 带有 5 个元素的整型数组
+   int balance[5] = {1000, 2, 3, 17, 50};
+   double avg;
+ 
+   // 传递一个指向数组的指针作为参数
+   avg = getAverage( balance, 5 ) ;
+ 
+   // 输出返回值
+   cout << "Average value is: " << avg << endl; 
+    
+   return 0;
+}
+ 
+double getAverage(int *arr, int size)
+{
+  int    i, sum = 0;       
+  double avg;          
+ 
+  for (i = 0; i < size; ++i)
+  {
+    sum += arr[i];
+   }
+ 
+  avg = double(sum) / size;
+ 
+  return avg;
+}
+```
+执行结果：
+```
+18930
+1762
+11979
+31450
+27517
+31377
+19471
+13911
+2663
+2026
+*(p + 0) : 18930
+*(p + 1) : 1762
+*(p + 2) : 11979
+*(p + 3) : 31450
+*(p + 4) : 27517
+*(p + 5) : 31377
+*(p + 6) : 19471
+*(p + 7) : 13911
+*(p + 8) : 2663
+*(p + 9) : 2026
+```
