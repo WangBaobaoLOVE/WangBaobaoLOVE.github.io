@@ -42,13 +42,13 @@ int Sequential_Search(int *a, int n, int key){
 
 ### 折半查找/二分查找（Binary_Search）
 
-$$mid = \frac{low+high}{2}=low+\frac{1}{2}(high-low)$$
+![](http://latex.codecogs.com/gif.latex?\\mid = \frac{low+high}{2}=low+\frac{1}{2}(high-low))
 
 ### 插值查找（Interpolation Search）
 
 插值查找是根据要查找的关键字key与查找表中的最大最小记录的关键字比较后的查找方法。跟二分查找的不同在于，根据前边的查找选择性的在某个区间先去查找，比如0~10000之间的100个元素，查找5，自然考虑从下标小的开始查找。
 
-$$mid = low + \frac{key-a[low]}{a[high]-a[low]}(high-low)$$
+![](http://latex.codecogs.com/gif.latex?\\mid = low + \frac{key-a[low]}{a[high]-a[low]}(high-low))
 
 对于表长较大，而关键字分布有比较均匀的查找表来说，插值查找算法的平均性能比二分查找要好的多。反之，如果分布极度不均匀的话，则未必合适。
 
