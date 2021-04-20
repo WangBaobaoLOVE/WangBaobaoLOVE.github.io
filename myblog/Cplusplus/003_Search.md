@@ -152,3 +152,21 @@ int Fibonacci_Search(int *a, int n, int key){
 5. 若他的右子树不空，则右子树上所有结点的值均大于他的根节点的值；
 6. 他的左右字数也分别为二叉排序树。
 
+### 二叉排序树查找操作
+
+二叉树结构
+```C++
+typedef struct BiTNode{
+    int data;
+    struct BiTNode *lchild, *rchild;
+}BiTNode, *BiTree;
+```
+
+二叉排序树查找
+```C++
+// 递归查找二叉排序树T中是否存在key
+// 指针f指向T的双亲，其初始调用值为NULL
+// 若查找成功，则指针p指向该数据元素节点，并返回True
+// 否则
+
+```
