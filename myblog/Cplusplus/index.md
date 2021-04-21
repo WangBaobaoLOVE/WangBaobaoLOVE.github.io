@@ -7,4 +7,5 @@
 3. [类class****](./005_class.md)
 4. [搜索/查找类数据结构](003_Search.md)
 5. [线性表数据结构](007_linearList.md)
-6. [树数据结构](006_tree.md)
+6. [栈和队列](008_StackAndQueue.md)
+7. [树数据结构](006_tree.md)
