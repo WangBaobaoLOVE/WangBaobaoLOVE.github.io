@@ -1,5 +1,11 @@
 # Search（搜索）
 
+
+|[上一篇](./005_class.md)|[目录](./index.md)|[下一篇](007_linearList.md)|
+|:---:|:---:|:---:|
+|[类class****](./005_class.md)|[目录](./index.md)|[线性表数据结构](007_linearList.md)|
+
+
 ## Hash Table(哈希表/散列表)
 
 - [案例程序(HashDemo1.c) Link](./003_Search/HashDemo1.c)
@@ -56,6 +62,7 @@ int Sequential_Search(int *a, int n, int key){
 ### 斐波那契查找Fibonacci Search（黄金分割原理）
 
 斐波那契数列：
+
 |下标|0|1|2|3|4|5|6|7|8|9|10|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |F|0|1|1|2|3|5|8|13|21|34|$\cdots$|
@@ -170,3 +177,8 @@ typedef struct BiTNode{
 // 否则
 
 ```
+
+
+|[上一篇](./005_class.md)|[目录](./index.md)|[下一篇](007_linearList.md)|
+|:---:|:---:|:---:|
+|[类class****](./005_class.md)|[目录](./index.md)|[线性表数据结构](007_linearList.md)|
