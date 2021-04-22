@@ -1,5 +1,9 @@
 # Linear List(线性表)
 
+|[上一篇](./003_Search.md)|[目录](./index.md)|[下一篇](./008_StackAndQueue.md)|
+|:---:|:---:|:---:|
+|[Search（搜索）](./003_Search.md)|[目录](./index.md)|[栈和队列](./008_StackAndQueue.md)|
+
 **线性表：零个或多个数据元素的有限序列。**
 
 ## 线性表的抽象数据类型
@@ -571,3 +575,8 @@ int main()
  双向链表的删除操作如下图:
 
  https://images2017.cnblogs.com/blog/675248/201710/675248-20171031113208449-1140407840.png
+
+
+ |[上一篇](./003_Search.md)|[目录](./index.md)|[下一篇](./008_StackAndQueue.md)|
+|:---:|:---:|:---:|
+|[Search（搜索）](./003_Search.md)|[目录](./index.md)|[栈和队列](./008_StackAndQueue.md)|

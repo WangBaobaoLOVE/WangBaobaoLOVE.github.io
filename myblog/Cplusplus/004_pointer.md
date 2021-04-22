@@ -1,5 +1,9 @@
 # 指针
 
+|[上一篇](./001_environment.md)|[目录](./index.md)|[下一篇](./005_class.md)|
+|:---:|:---:|:---:|
+|[Windows下配置C++开发环境](./001_environment.md)|[目录](./index.md)|[类class****](./005_class.md)|
+
 1. [菜鸟教程 C++ 指针](https://www.runoob.com/cplusplus/cpp-pointers.html)
 
 
@@ -524,3 +528,9 @@ double getAverage(int *arr, int size)
 *(p + 8) : 2663
 *(p + 9) : 2026
 ```
+
+
+
+|[上一篇](./001_environment.md)|[目录](./index.md)|[下一篇](./005_class.md)|
+|:---:|:---:|:---:|
+|[Windows下配置C++开发环境](./001_environment.md)|[目录](./index.md)|[类class****](./005_class.md)|
