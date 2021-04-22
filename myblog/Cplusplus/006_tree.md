@@ -1,5 +1,9 @@
 # Tree(树)
 
+|[上一篇](./009_String.md)|[目录](./index.md)|[下一篇]()|
+|:---:|:---:|:---:|
+|[串](./009_String.md)|[目录](./index.md)|[]()|
+
 ## 树的定义
 
 ![](https://img-blog.csdnimg.cn/20190226104545845.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTI2MjQ1Mw==,size_16,color_FFFFFF,t_70)
@@ -64,3 +68,7 @@ endADT
 ### 孩子表示法
 
 ### 孩子兄弟表示法
+
+|[上一篇](./009_String.md)|[目录](./index.md)|[下一篇]()|
+|:---:|:---:|:---:|
+|[串](./009_String.md)|[目录](./index.md)|[]()|

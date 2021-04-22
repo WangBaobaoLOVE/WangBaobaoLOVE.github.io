@@ -1,8 +1,8 @@
 # 栈和队列
 
-|[上一篇](./007_linearList.md)|[目录](./index.md)|[下一篇]()|
+|[上一篇](./007_linearList.md)|[目录](./index.md)|[下一篇](./009_String.md)|
 |:---:|:---:|:---:|
-|[线性表结构](./007_linearList.md)|[目录](./index.md)|[]()|
+|[线性表结构](./007_linearList.md)|[目录](./index.md)|[串](./009_String.md)|
 
 ## 栈
 
@@ -546,6 +546,6 @@ Status EnQueue(LinkQueue *Q,QElemType e)
 3. 在可以确定队列长度最大值的情况下，建议用循环队列，如果无法预估队列的长度时，则用链队列
 
 
-|[上一篇](./007_linearList.md)|[目录](./index.md)|[下一篇]()|
+|[上一篇](./007_linearList.md)|[目录](./index.md)|[下一篇](./009_String.md)|
 |:---:|:---:|:---:|
-|[线性表结构](./007_linearList.md)|[目录](./index.md)|[]()|
+|[线性表结构](./007_linearList.md)|[目录](./index.md)|[串](./009_String.md)|

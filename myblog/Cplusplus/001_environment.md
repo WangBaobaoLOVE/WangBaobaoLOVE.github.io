@@ -1,4 +1,9 @@
 # Windows下配置C++开发环境
+
+|[到头了]()|[目录](./index.md)|[下一篇](./004_pointer.md)|
+|:---:|:---:|:---:|
+|[]()|[目录](./index.md)|[指针](./004_pointer.md)|
+
 ## VS Code
 ### 下载安装
 1. 下载地址：[link](https://code.visualstudio.com/Download)
@@ -53,3 +58,7 @@ int main()
     printf("%d",maxs);
 }
 ``` 
+
+|[到头了]()|[目录](./index.md)|[下一篇](./004_pointer.md)|
+|:---:|:---:|:---:|
+|[]()|[目录](./index.md)|[指针](./004_pointer.md)|
