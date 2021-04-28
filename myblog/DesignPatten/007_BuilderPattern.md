@@ -14,7 +14,213 @@
 
     将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。
 
-“同样的构建过程可以创建不同的表示”？？这句话是什么意思呢？想象一下，建造一栋房子，建造过程无非都是打地基、筑墙、安装门窗等过程，但不同的客户可能希望不同的风格或者过程，最终建造出来的房子当然就呈现不同的风格啦！
+**“同样的构建过程可以创建不同的表示”**？？这句话是什么意思呢？想象一下，建造一栋房子，建造过程无非都是打地基、筑墙、安装门窗等过程，但不同的客户可能希望不同的风格或者过程，最终建造出来的房子当然就呈现不同的风格啦！
+
+## 建造者模式结构
+
+建造者模式的结构包含以下几个角色：
+
+1. **抽象建造者（AbstractBuilder）**：创建一个Product对象的各个部件指定的抽象接口;
+2. **具体建造者（ConcreteBuilder）**：实现AbstractBuilder的接口，实现各个部件的具体构造方法和装配方法，并返回创建结果。
+3. **产品（Product）**：具体的产品对象
+4. **指挥者（Director）**： 构建一个使用Builder接口的对象，安排复杂对象的构建过程，客户端一般只需要与Director交互，指定建造者类型，然后通过构造函数或者setter方法将具体建造者对象传入Director。它主要作用是：隔离客户与对象的生产过程，并负责控制产品对象的生产过程。
+
+建造者模式UML类图如下：
+
+![](https://img-blog.csdnimg.cn/20191019112346451.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxMTA3NDMz,size_16,color_FFFFFF,t_70)
+
+## 建造者模式代码实例
+
+考虑这样一个场景，如下图：
+
+    Jungle想要建造一栋简易的房子（地板、墙和天花板），两个工程师带着各自的方案找上门来，直接给Jungle看方案和效果图。犹豫再三，Jungle最终选定了一位工程师……交房之日，Jungle满意的看着建好的房子，开始思考：这房子究竟是怎么建成的呢？这地板、墙和天花板是怎么建造的呢？工程师笑着说：“It's none of your business”
+
+![](https://img-blog.csdnimg.cn/20191019114642328.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxMTA3NDMz,size_16,color_FFFFFF,t_70)
+
+ UML图如下：
+
+ ![](https://img-blog.csdnimg.cn/20191019152832422.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxMTA3NDMz,size_16,color_FFFFFF,t_70)
+
+ ### 定义产品类House
+
+ ```C++
+//产品类House
+class House
+{
+public:
+	House(){}
+	void setFloor(string iFloor){
+		this->floor = iFloor;
+	}
+	void setWall(string iWall){
+		this->wall = iWall;
+	}
+	void setRoof(string iRoof){
+		this->roof = iRoof;
+	}
+	//打印House信息
+	void printfHouseInfo(){
+		printf("Floor:%s\t\n", this->floor.c_str());
+		printf("Wall:%s\t\n", this->wall.c_str());
+		printf("Roof:%s\t\n", this->roof.c_str());
+	}
+private:
+	string floor;
+	string wall;
+	string roof;
+};
+ ```
+
+ House是本实例中的产品，具有floor、wall和roof三个属性。
+
+ ### 定义建造者
+
+ #### 定义抽象建造者AbstractBuilder
+
+ ```C++
+//抽象建造者AbstractBall
+class AbstractBuilder
+{
+public:
+	AbstractBuilder(){
+		house = new House();
+	}
+	//抽象方法：
+	virtual void buildFloor() = 0;
+	virtual void buildWall() = 0;
+	virtual void buildRoof() = 0;
+	virtual House *getHouse() = 0;
+ 
+	House *house;
+};
+ ```
+
+#### 定义具体建造者 
+
+```C++
+//具体建造者ConcreteBuilderA
+class ConcreteBuilderA :public AbstractBuilder
+{
+public:
+	ConcreteBuilderA(){
+		printf("ConcreteBuilderA\n");
+	}
+	//具体实现方法
+	void buildFloor(){
+		this->house->setFloor("Floor_A");
+	}
+	void buildWall(){
+		this->house->setWall("Wall_A");
+	}
+	void buildRoof(){
+		this->house->setRoof("Roof_A");
+	}
+	House *getHouse(){
+		return this->house;
+	}
+};
+ 
+//具体建造者ConcreteBuilderB
+class ConcreteBuilderB :public AbstractBuilder
+{
+public:
+	ConcreteBuilderB(){
+		printf("ConcreteBuilderB\n");
+	}
+	//具体实现方法
+	void buildFloor(){
+		this->house->setFloor("Floor_B");
+	}
+	void buildWall(){
+		this->house->setWall("Wall_B");
+	}
+	void buildRoof(){
+		this->house->setRoof("Roof_B");
+	}
+	House *getHouse(){
+		return this->house;
+	}
+};
+```
+
+#### 定义指挥者
+
+```C++
+//指挥者Director
+class Director
+{
+public:
+	Director(){}
+	//具体实现方法
+	void setBuilder(AbstractBuilder *iBuilder){
+		this->builder = iBuilder;
+	}
+    //封装组装流程，返回建造结果
+	House *construct(){
+		builder->buildFloor();
+		builder->buildWall();
+		builder->buildRoof();
+		return builder->getHouse();
+	}
+private:
+	AbstractBuilder *builder;
+};
+```
+
+#### 客户端代码示例
+
+```C++
+#include "BuilderPattern.h"
+ 
+int main()
+{
+	//抽象建造者
+	AbstractBuilder *builder;
+	//指挥者
+	Director *director = new Director();
+	//产品：House
+	House *house;
+ 
+	//指定具体建造者A
+	builder = new ConcreteBuilderA();
+	director->setBuilder(builder);
+	house = director->construct();
+	house->printfHouseInfo();
+ 
+	//指定具体建造者B
+	builder = new ConcreteBuilderB();
+	director->setBuilder(builder);
+	house = director->construct();
+	house->printfHouseInfo();
+ 
+	system("pause");
+	return 0;
+}
+```
+
+## 效果
+
+![](https://img-blog.csdnimg.cn/20191019153453339.png)
+
+## 建造者模式总结
+
+ 从客户端代码可以看到，客户端只需指定具体建造者，并作为参数传递给指挥者，通过指挥者即可得到结果。客户端无需关心House的建造方法和具体流程。如果要更换建造风格，只需更换具体建造者即可，不同建造者之间并无任何关联，方便替换。从代码优化角度来看，其实可以不需要指挥者Director的角色，而直接把construct方法放入具体建造者当中。
+
+优点：
+
+1. 建造者模式中，客户端不需要知道产品内部组成细节，将产品本身和产品的创建过程分离，使同样的创建过程可以创建不同的产品对象；
+2. 不同建造者相互独立，并无任何挂链，方便替换。
+
+缺点：
+
+1. 建造者模式所创建的产品一般具有较多的共同点，其组成部分相似，如果产品之间的差异性很大，则不适合使用建造者模式，因此其使用范围受到一定的限制。
+2. 如果产品的内部变化复杂，可能会导致需要定义很多具体建造者类来实现这种变化，导致系统变得很庞大
+
+适用环境：
+
+1. 需要生成的产品对象有复杂的内部结构（通常包含多个成员变量）；
+2. 产品对象内部属性有一定的生成顺序；
+3. 同一个创建流程适用于多种不同的产品。
 
 |[上一篇](./006_AbstractFactory.md)|[目录](./index.md)|[下一篇](./008_PrototypePattern.md)|
 |:---:|:---:|:---:|
