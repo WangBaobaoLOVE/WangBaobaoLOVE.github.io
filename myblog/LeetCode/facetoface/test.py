@@ -1,30 +1,19 @@
-class Solution:
-    def compressString(self, S: str) -> str:
-        stack1 = [0]
-        mid = 0
-        lens = 0
-        length = -2
-        for i in S:
-            if mid == i:
-                lens +=1
-            else:
-                mid = i
-                stack1.append(str(lens))
-                lens=1
-                stack1.append(i)
-                length += 2
-        stack1.append(str(lens))
-        length += 2
+class WordsFrequency:
+
+    def __init__(self, book):
+        self.words = {}
+        for word in book:
+            try:
+                if self.words[word]:
+                    self.words[word] +=1
+            except:
+                self.words[word] = 1
+
+    def get(self, word: str) -> int:
+        return self.words[word]
         
-        if length<len(S):
-            s = ''.join(stack1[2:])
-            return s
-        return S 
+book = WordsFrequency(["i","have","an","apple","he","have","a","pen"])
+for i in ["i","have","an","apple","he","have","a","pen"]:
+    print(book.get(i))
 
-s = Solution()
-
-s1 ="aabcccccaaa"
-s2 ="a2b1c5a3"
-
-print(s.compressString(s1))
 
