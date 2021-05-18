@@ -19,3 +19,5 @@
 ### [D3.js]()
 
 ### [React.js]()
+
+[-](./Psychology/index.md)[-](./Economics/index.md)
