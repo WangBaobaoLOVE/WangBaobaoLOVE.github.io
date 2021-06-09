@@ -10,6 +10,8 @@
 
 ## [LeetCode](./LeetCode/index.md)
 
+## [LaTeX]()
+
 ## [JS](./JS/index.md)
 
 ### [thing.js](./)
