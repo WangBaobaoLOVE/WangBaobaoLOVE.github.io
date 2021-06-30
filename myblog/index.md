@@ -10,16 +10,8 @@
 
 ## [LeetCode](./LeetCode/index.md)
 
-## [LaTeX]()
+## [LaTeX](./LaTeX/index.md)
 
-## [JS](./JS/index.md)
-
-### [thing.js](./)
-
-### [node.js]()
-
-### [D3.js]()
-
-### [React.js]()
+## [MySQL](./MySQL/index.md)
 
 [-](./Psychology/index.md)[-](./Economics/index.md)
