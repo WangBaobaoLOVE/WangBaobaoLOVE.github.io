@@ -33,7 +33,9 @@
 
 考虑这样一个场景，如下图：
 
-    Jungle想要建造一栋简易的房子（地板、墙和天花板），两个工程师带着各自的方案找上门来，直接给Jungle看方案和效果图。犹豫再三，Jungle最终选定了一位工程师……交房之日，Jungle满意的看着建好的房子，开始思考：这房子究竟是怎么建成的呢？这地板、墙和天花板是怎么建造的呢？工程师笑着说：“It's none of your business”
+	Jungle想要建造一栋简易的房子（地板、墙和天花板），两个工程师带着各自的方案找上门来，直接给Jungle看方案和效果图。
+	犹豫再三，Jungle最终选定了一位工程师……交房之日，Jungle满意的看着建好的房子，开始思考：这房子究竟是怎么建成的呢？
+	这地板、墙和天花板是怎么建造的呢？工程师笑着说：“It's none of your business”
 
 ![](https://img-blog.csdnimg.cn/20191019114642328.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxMTA3NDMz,size_16,color_FFFFFF,t_70)
 
@@ -41,7 +43,7 @@
 
  ![](https://img-blog.csdnimg.cn/20191019152832422.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxMTA3NDMz,size_16,color_FFFFFF,t_70)
 
- ### 定义产品类House
+### 定义产品类House
 
  ```C++
 //产品类House
@@ -73,9 +75,9 @@ private:
 
  House是本实例中的产品，具有floor、wall和roof三个属性。
 
- ### 定义建造者
+### 定义建造者
 
- #### 定义抽象建造者AbstractBuilder
+#### 定义抽象建造者AbstractBuilder
 
  ```C++
 //抽象建造者AbstractBall
