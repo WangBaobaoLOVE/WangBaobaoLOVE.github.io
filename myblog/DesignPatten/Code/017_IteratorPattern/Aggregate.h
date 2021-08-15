@@ -3,6 +3,7 @@
 
 #include <vector>
 using namespace std;
+#include<string> 
 
 // 前向声明，因为两个类互相引用
 class Iterator;
@@ -31,5 +32,4 @@ public:
 private:
 	vector<string> channelList;
 };
-
 #endif //__AGGREGATE_H__

@@ -2,6 +2,52 @@
 #include "Mediator.h"
 #include "Colleague.h"
 
+Landlord::Landlord(){
+	name = "none";
+	price = 0;
+	address = "none";
+	phoneNumber = "none";
+	setPersonType(NONE_PERSON);
+}
+
+Landlord::Landlord(string iName, int iPrice, 
+	string iAddress, string iPhoneNum){
+	name = iName;
+	price = iPrice;
+	address = iAddress;
+	phoneNumber = iPhoneNum;
+	setPersonType(LANDLORD);
+}
+
+void Landlord::answer(){
+	printf("房东姓名：%s, 房租：%d, 地址：%s, 联系电话：%s\n",
+		name.c_str(), price, address.c_str(), phoneNumber.c_str());
+}
+
+void Landlord::ask(){
+	printf("房东%s查看租客信息：\n",name.c_str());
+	(this->getMediator())->operation(this);
+}
+
+Tenant::Tenant(){
+	name = "none";
+	setPersonType(NONE_PERSON);
+}
+
+Tenant::Tenant(string iName){
+	name = iName;
+	setPersonType(TENANT);
+}
+
+void Tenant::ask(){
+	printf("租客%s询问房东信息\n", name.c_str()); 
+	(this->getMediator())->operation(this);
+}
+
+void Tenant::answer(){
+	printf("租客姓名：%s\n", name.c_str());
+}
+
 int main()
 {
 	// 创建租房中介

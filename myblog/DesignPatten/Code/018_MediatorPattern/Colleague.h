@@ -59,5 +59,4 @@ public:
 private:
 	string name;
 };
-
 #endif //__COLLEAGUE_H__

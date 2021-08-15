@@ -16,8 +16,8 @@ public:
 	virtual ~Command(){}
 	// 声明抽象接口：发送命令
 	virtual void execute() = 0;
-private:
-	Command *command;
+// private:
+// 	Command *command;
 };
 
 // 接收者：电灯类

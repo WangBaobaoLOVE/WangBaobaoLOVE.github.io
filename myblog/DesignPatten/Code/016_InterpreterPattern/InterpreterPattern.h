@@ -2,6 +2,8 @@
 #define __INTERPRETOR_PATTERN_H__
 
 #include <vector>
+#include <string.h>
+#include <stdio.h>
 using namespace std;
 
 // 抽象表达式类
