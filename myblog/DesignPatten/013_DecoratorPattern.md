@@ -1,59 +1,59 @@
-# װ��ģʽ
+# 装饰模式
 
-|[��һƪ](./012_CompositePattern.md)|[Ŀ¼](./index.md)|[��һƪ](./014_FacadePattern.md)|
+|[上一篇](./012_CompositePattern.md)|[目录](./index.md)|[下一篇](./014_FacadePattern.md)|
 |:---:|:---:|:---:|
-|[���ģʽ](./012_CompositePattern.md)|[Ŀ¼](./index.md)|[���ģʽ](./014_FacadePattern.md)|
+|[组合模式](./012_CompositePattern.md)|[目录](./index.md)|[外观模式](./014_FacadePattern.md)|
 
-    �ɶ�������˵���ͽ�������û�����أ��¶���Ȼ�½���ֻ��10���ˡ�
-    ����ס�ˣ�JungleҪ��һ��ë�£�
+    成都的气温说降就降啊！还没立冬呢，温度骤然下降，只有10度了。
+    扛不住了，Jungle要穿一件毛衣！
 
-    ����Ż��Ǻ��䣡���ٴ���Χ����
+    额，出门还是很冷！那再带个围巾！
 
-    �죬�ϰ��������ˣ��°�������ô��~~~������㣡
+    天，上半身不冷了，下半身还那么冷~~~穿上秋裤！
 
-    ����ǰ�����룬����������Ħ�ݵ���һ���������䣬����Jungle�ִ��������ס���
+    出门前想了想，这种天气骑摩拜单车一定吹着手冷，于是Jungle又带上了手套……
 
-    �������������ˣ�Jungle���ʲô�¿㼴��ʲô�¿㣬����װ����Jungle���ٸе����䡣����������Jungle���ٶ��·���Jungleʼ�ջ����Ǹ�Jungle���Ǹ������ڳɶ��Ĺ��ӣ���һ���ǲ���ģ�
+    看到了吗，天冷了，Jungle想加什么衣裤即加什么衣裤，各种装饰让Jungle不再感到寒冷。不过，不管Jungle穿再多衣服，Jungle始终还是那个Jungle，那个生活在成都的狗子，这一点是不变的！
 
-����������������������װ��ģʽ�ĵ���Ӧ�ã�**�����ٶ���β�����ı�Jungle�ı��ʣ�����������Jungle������ů��˧��������Jungle������е�����**����������У������ж���Ĺ��ܽ�����չ���Ի�ø��ӷ����û�����Ķ���ʹ�ö�����и���ǿ��Ĺ��ܣ������װ��ģʽ��
+看到上面的例子了吗？这就是装饰模式的典型应用，**穿戴再多服饰并不会改变Jungle的本质，但穿戴会让Jungle更加温暖和帅气，满足Jungle冷天出行的需求。**在软件设计中，对已有对象的功能进行扩展，以获得更加符合用户需求的对象，使得对象具有更加强大的功能，这就是装饰模式。
 
-## װ��ģʽ���
+## 装饰模式简介
 
-װ��ģʽ�����ڲ��ı�һ�����������ܵĻ����ϸ��������Ӷ��������Ϊ�������ֻ���Ϊ��ֹˤ�������Ը��ֻ���Ĥ���ߴ��ϱ����ף�Ϊ���ۣ������ڱ�����������ͨ��ֽ��Ϊ����Я���������ӹ���������ͼ�����Ⲣ���ı��ֻ��ı��ʡ�
+装饰模式可以在不改变一个对象本身功能的基础上给对象增加额外的新行为，比如手机，为防止摔坏，可以给手机贴膜或者带上保护套；为美观，可以在保护套上贴卡通贴纸；为便于携带可以增加挂绳，如下图。但这并不改变手机的本质。
 
 ![](https://img-blog.csdnimg.cn/20191024220520320.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxMTA3NDMz,size_16,color_FFFFFF,t_70)
 
-    װ��ģʽ��
+    装饰模式：
 
-    ��̬�ظ�һ����������һЩ�����ְ�𡣾���չ���ܶ��ԣ�װ��ģʽ�ṩ��һ�ֱ�ʹ����������������������
+    动态地给一个对象增加一些额外的职责。就扩展功能而言，装饰模式提供了一种比使用子类更加灵活的替代方案。
 
- װ��ģʽ��һ����������̳еļ�����ͨ��һ�����붨������ķ�ʽ������̬����ְ��ʹ�ö���֮��Ĺ�����ϵȡ����֮��ļ̳й�ϵ��װ��ģʽ��������װ���࣬��װ�����мȿ��Ե��ô�װ�ε�ԭ�ж���ķ����������������µķ�����������ԭ����Ĺ��ܡ�
+ 装饰模式是一种用于替代继承的技术。通过一种无须定义子类的方式给对象动态增加职责，使用对象之间的关联关系取代类之间的继承关系。装饰模式中引入了装饰类，在装饰类中既可以调用待装饰的原有对象的方法，还可以增加新的方法，以扩充原有类的功能。
 
- ## װ��ģʽ�ṹ
+ ## 装饰模式结构
 
- װ��ģʽ�Ľṹ��ͼ��ʾ��
+ 装饰模式的结构如图所示：
 
  ![](https://img-blog.csdnimg.cn/20191024221618611.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxMTA3NDMz,size_16,color_FFFFFF,t_70)
 
-װ��ģʽ�������½�ɫ��
+装饰模式中有如下角色：
 
-* **Component�����󹹼���**���Ǿ��幹�����װ����Ĺ�ͬ���࣬�������ھ��幹���ж���ķ������ͻ��˿���һ�µĶԴ�ʹ��װ��ǰ��Ķ���
-* **ConcreteComponent�����幹����**�����幹�������˹�������ķ�����װ������Ը������Ӹ���Ĺ��ܣ�
-* **Decorator������װ���ࣩ**�����ڸ����幹������ְ�𣬵�����ְ������������ʵ�֡�����װ����ͨ���ۺϹ�ϵ����һ�����󹹼��Ķ���ͨ���ö�����Ե���װ��֮ǰ�����ķ�������ͨ����������չ�÷������ﵽװ�ε�Ŀ�ģ�
-* **ConcreteDecorator������װ���ࣩ**�� �򹹼������µĹ��ܡ�
+* **Component（抽象构件）**：是具体构件类和装饰类的共同基类，声明了在具体构件中定义的方法，客户端可以一致的对待使用装饰前后的对象；
+* **ConcreteComponent（具体构件）**：具体构件定义了构件具体的方法，装饰类可以给它增加更多的功能；
+* **Decorator（抽象装饰类）**：用于给具体构件增加职责，但具体职责在其子类中实现。抽象装饰类通过聚合关系定义一个抽象构件的对象，通过该对象可以调用装饰之前构件的方法，并通过其子类扩展该方法，达到装饰的目的；
+* **ConcreteDecorator（具体装饰类）**： 向构件增加新的功能。
 
-�������ᵽ���ֻ�Ϊ�����ֻ�����һ�����幹�������ֻ��ǡ��ֻ���ֽ���ֻ����������Ǿ����װ���ࡣ��Jungle���������ǰ���Ĵ��Ϊ����Jungle������һ�����幹�����󣬸����¿�Χ�����׶��Ǿ����װ�������
+以上面提到的手机为例，手机就是一个具体构件，而手机壳、手机贴纸和手机挂绳，都是具体的装饰类。以Jungle在冷天出门前精心打扮为例，Jungle本人是一个具体构件对象，各类衣裤围巾手套都是具体的装饰类对象。
 
-## װ��ģʽ����ʵ��
+## 装饰模式代码实例
 
-�����Ը��ֻ������ֻ��ǡ������ֻ���ֽ��ϵ���ֻ�����Ϊ����չʾװ��ģʽ�Ĵ��롣������UMLͼ������ʾ��
+本节以给手机带上手机壳、贴上手机贴纸、系上手机挂绳为例，展示装饰模式的代码。该例的UML图如下所示：
 
 ![](https://img-blog.csdnimg.cn/20191024224124413.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxMTA3NDMz,size_16,color_FFFFFF,t_70)
 
-### ���󹹼���
+### 抽象构件类
 
 ```C++
-    //���󹹼�
+    //抽象构件
     class Component
     {
     public:
@@ -62,26 +62,26 @@
     };
 ```
 
-### ���幹����
+### 具体构件类
 
 ```C++
-    //���幹����
+    //具体构件类
     class Phone :public Component
     {
     public:
     	Phone(){}
     	void operation(){
-    		printf("�ֻ�\n");
+    		printf("手机\n");
     	}
     };
 ```
 
-### װ����
+### 装饰类
 
-#### ����װ����
+#### 抽象装饰类
 
 ```C++
-//����װ����
+//抽象装饰类
 class Decorator :public Component
 {
 public:
@@ -103,14 +103,14 @@ private:
 };
 ```
 
-����װ��������һ����Ա����component���Լ�setter��getter������
+抽象装饰类中有一个成员对象component，以及setter和getter方法。
 
-#### ����װ����
+#### 具体装饰类
 
-����װ����һ�����������ֱ����ֻ���װ����DecoratorShell����ֽװ����DecoratorSticker�͹���װ����DecoratorRope��ÿһ������װ���඼�����˸����µ�ְ��newBehavior��
+具体装饰类一共有三个，分别是手机壳装饰类DecoratorShell、贴纸装饰类DecoratorSticker和挂绳装饰类DecoratorRope。每一个具体装饰类都增加了各自新的职责newBehavior。
 
 ```C++
-//����װ���ࣺ�ֻ���
+//具体装饰类：手机壳
 class DecoratorShell:public Decorator
 {
 public:
@@ -123,11 +123,11 @@ public:
 		this->newBehavior();
 	}
 	void newBehavior(){
-		printf("װ�ֻ���\n");
+		printf("装手机壳\n");
 	}
 };
  
-//����װ���ࣺ�ֻ���ֽ
+//具体装饰类：手机贴纸
 class DecoratorSticker :public Decorator
 {
 public:
@@ -140,11 +140,11 @@ public:
 		this->newBehavior();
 	}
 	void newBehavior(){
-		printf("����ͨ��ֽ\n");
+		printf("贴卡通贴纸\n");
 	}
 };
  
-//����װ���ࣺ�ֻ�����
+//具体装饰类：手机挂绳
 class DecoratorRope :public Decorator
 {
 public:
@@ -157,14 +157,14 @@ public:
 		this->newBehavior();
 	}
 	void newBehavior(){
-		printf("ϵ�ֻ�����\n");
+		printf("系手机挂绳\n");
 	}
 };
 ```
 
-## �ͻ��˴���ʾ��
+## 客户端代码示例
 
-�ͻ���չʾ�����δ��룬�ֱ�Ϊ�����ֻ����ϲ�ͬ��װ�Σ�
+客户端展示了三段代码，分别为三个手机配上不同的装饰：
 
 ```C++
 #include <iostream>
@@ -172,14 +172,14 @@ public:
  
 int main()
 {
-	printf("\nJungle�ĵ�һ���ֻ���\n");
+	printf("\nJungle的第一个手机：\n");
 	Component *c;
 	Component *com_Shell;
 	c = new Phone();
 	com_Shell = new DecoratorShell(c);
 	com_Shell->operation();
  
-	printf("\nJungle�ĵڶ����ֻ���\n");
+	printf("\nJungle的第二个手机：\n");
 	Component *c2;
 	Component *com_Shell2;
 	c2 = new Phone();
@@ -188,7 +188,7 @@ int main()
 	com_Sticker = new DecoratorSticker(com_Shell2);
 	com_Sticker->operation();
  
-	printf("\nJungle�ĵ������ֻ���\n");
+	printf("\nJungle的第三个手机：\n");
 	Component *c3;
 	Component *com_Shell3;
 	c3 = new Phone();
@@ -206,26 +206,26 @@ int main()
 }
 ```
 
-## �ܽ�
+## 总结
 
-### �ŵ㣺
+### 优点：
 
-* ������չһ������¹��ܣ�װ��ģʽ�ȼ̳и�����
-* ��̬��չһ������Ĺ��ܣ�
-* ���Զ�һ��������ж��װ�Σ����������ӵڶ����ֻ��͵������ֻ�����
-* ���幹����;���װ������Զ����仯����չ�����Ͽ���ԭ��
+* 对于扩展一个类的新功能，装饰模式比继承更加灵活；
+* 动态扩展一个对象的功能；
+* 可以对一个对象进行多次装饰（如上述例子第二个手机和第三个手机）；
+* 具体构件类和具体装饰类可以独立变化和扩展，符合开闭原则。
 
-### ȱ�㣺
+### 缺点：
 
-* װ��ģʽ�л����Ӻܶ�С�Ķ��󣬶����������Ҫ���ڸ���װ�ε����ӷ�ʽ��ͬ����������ְ��ͬ������С����Ĳ�����ռ�ý϶��ϵͳ��Դ��
-* װ��ģʽ�ȼ̳�ģʽ������Ҳ�����׳������������Ŵ���
+* 装饰模式中会增加很多小的对象，对象的区别主要在于各种装饰的连接方式不同，而并不是职责不同，大量小对象的产生会占用较多的系统资源；
+* 装饰模式比继承模式更灵活，但也更容易出错，更难于排错。
 
-### ���ó�����
+### 适用场景：
 
-* �ڲ�Ӱ���������������£�����������̬��չְ��
-* �����˲��ü̳еķ�ʽ������չ��ʱ�򣬿��Կ���ʹ��װ��ģʽ��
+* 在不影响其他对象的情况下，给单个对象动态扩展职责；
+* 不适宜采用继承的方式进行扩展的时候，可以考虑使用装饰模式。
 
 
-|[��һƪ](./012_CompositePattern.md)|[Ŀ¼](./index.md)|[��һƪ](./014_FacadePattern.md)|
+|[上一篇](./012_CompositePattern.md)|[目录](./index.md)|[下一篇](./014_FacadePattern.md)|
 |:---:|:---:|:---:|
-|[���ģʽ](./012_CompositePattern.md)|[Ŀ¼](./index.md)|[���ģʽ](./014_FacadePattern.md)|
+|[组合模式](./012_CompositePattern.md)|[目录](./index.md)|[外观模式](./014_FacadePattern.md)|

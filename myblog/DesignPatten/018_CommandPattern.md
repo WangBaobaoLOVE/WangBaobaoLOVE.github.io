@@ -1,52 +1,52 @@
-# ����ģʽ
+# 命令模式
 
-|[��һƪ](./017_ChainOfResponsibility.md)|[Ŀ¼](./index.md)|[��һƪ](./019_InterpreterPattern.md)|
+|[上一篇](./017_ChainOfResponsibility.md)|[目录](./index.md)|[下一篇](./019_InterpreterPattern.md)|
 |:---:|:---:|:---:|
-|[ְ����ģʽ](./017_ChainOfResponsibility.md)|[Ŀ¼](./index.md)|[������ģʽ](./019_InterpreterPattern.md)|
+|[职责链模式](./017_ChainOfResponsibility.md)|[目录](./index.md)|[解释器模式](./019_InterpreterPattern.md)|
 
-    ���ǵ�Jungle������Ƶ�QtͼƬ����������������һ�š��������һ��ͼƬ��
-    �������һ�š��������һ��ͼƬ��������Զ����š������Զ����ϵ��²���ÿһ��ͼƬ��
-    �ǲ��Ǻ���Ȥ��һ��С����
+    还记得Jungle曾经设计的Qt图片浏览器吗？鼠标点击“上一张”，浏览上一张图片；
+    点击“下一张”，浏览下一张图片；点击“自动播放”，则自动从上到下播放每一张图片。
+    是不是很有趣的一个小程序？
 
-�����ĳ�������ͺ����û�����ͼƬ���������ָ�ͼƬ������ڲ����յ�ָ���ʼ������Ӧ�ĺ��������ս���ǲ�����һ�Ż���һ��ͼƬ����ִ�л���Ӧ���û�����������ͻ�����֪��������������ʲô��ʽ��Ҳ��֪��ͼƬ������ڲ����������ִ�еģ�ͬ����������ڲ�Ҳ��֪����˭���������**����ķ��ͷ��ͽ��շ���ִ�з���û���κι���**�����������ģʽ�У���һ��**������ķ�������ִ���߽�������ģʽ��������ģʽ**��
+鼠标点击某个键，就好像用户在向图片浏览器发送指令，图片浏览器内部接收到指令后开始调用相应的函数，最终结果是播放上一张或下一张图片，即执行或响应了用户发出的命令。客户并不知道发出的命令是什么形式，也不知道图片浏览器内部命令是如何执行的；同样，浏览器内部也不知道是谁发送了命令。**命令的发送方和接收方（执行方）没有任何关联**。在软件设计模式中，有一种**将命令的发送者与执行者解耦的设计模式——命令模式**。
 
 ![](https://img-blog.csdnimg.cn/20191030071941696.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxMTA3NDMz,size_16,color_FFFFFF,t_70)
 
-## ����ģʽ���
+## 命令模式简介
 
-����ģʽ���Խ���������ķ��������������ȫ����������������֮��û��ֱ�����ù�ϵ����������Ķ���ֻ��Ҫ֪����η������󣬶�����֪�������������ɵġ������ǱȽϻ�ɬ�Ѷ�������ģʽ�Ķ��壺
+命令模式可以将请求（命令）的发送者与接收者完全解耦，发送者与接收者之间没有直接引用关系，发送请求的对象只需要知道如何发送请求，而不必知道请求是如何完成的。下面是比较晦涩难懂的命令模式的定义：
 
-    ����ģʽ��
+    命令模式：
 
-    ��һ�������װΪһ�����󣬴Ӷ����ò�ͬ������Կͻ����в��������������Ŷӻ��߼�¼������־���Լ�֧�ֿɳ����Ĳ�����
+    将一个请求封装为一个对象，从而可用不同的请求对客户进行参数化，对请求排队或者记录请求日志，以及支持可撤销的操作。
 
- ����ģʽ�Ķ���Ƚϸ��ӣ�Ҳ�ᵽһЩ�����Щ��������Ĳ����;���������һ��˵����
+ 命令模式的定义比较复杂，也提到一些术语。这些将在下面的阐述和举例中做进一步说明。
 
-## ����ģʽ�ṹ
+## 命令模式结构
 
 ![](https://img-blog.csdnimg.cn/20191029235510879.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxMTA3NDMz,size_16,color_FFFFFF,t_70)
 
-����ģʽ��UML�ṹ����ͼ������ģʽһ�������¼��ֽ�ɫ��
+命令模式的UML结构如上图，命令模式一共有以下几种角色：
 
-* **Command�����������ࣩ**����һ�������࣬����������ִ������Ľӿ�execute()��
-* **ConcreteCommand�����������ࣩ**������������࣬ʵ����ִ������Ľӿ�execute()������Ӧ����Ľ����߶��󣬽������ߣ�Receiver���Ķ���action()�����С���execu()�����н����ý����ߵĶ���action()��**������Ƕ����еġ��������װ��һ�����󡱵����֣�**
-* **Invoker�������ߣ�**������ķ����ߣ�ͨ�����������ִ������һ�������߲���Ҫ�����ʱȷ��������ߣ����Ե�����ͨ���ۺϣ������������������**����ʵ���У����Խ�һ�������������ע�뵽�������У���ͨ�����þ�����������execute()������ʵ�ּ����������ִ���ߣ������ߣ��Ĳ���**��
-* **Receiver�������ߣ�**�� ʵ�ִ�������ľ��������action����
+* **Command（抽象命令类）**：是一个抽象类，声明了用于执行命令的接口execute()。
+* **ConcreteCommand（具体命令类）**：具体的命令类，实现了执行命令的接口execute()，它对应具体的接收者对象，将接收者（Receiver）的动作action()绑定其中。在execu()方法中将调用接收者的动作action()。**（这就是定义中的“将请求封装成一个对象”的体现）**
+* **Invoker（调用者）**：请求的发送者，通过命令对象来执行请求。一个调用者不需要在设计时确定其接收者，所以调用者通过聚合，与命令类产生关联。**具体实现中，可以将一个具体命令对象注入到调用者中，再通过调用具体命令对象的execute()方法，实现简介请求命令执行者（接收者）的操作**。
+* **Receiver（接收者）**： 实现处理请求的具体操作（action）。
 
-## ����ģʽ����ʵ��
+## 命令模式代码实例
 
-    �����е�**���أ�Button��**��������ģʽ��һ��ʵ�֣�����ʹ������ģʽ��ģ�⿪�ع���
-    ���ɿ��ƵĶ������**��ƣ�Lamp��**��**���ȣ�Fan��**���û�ÿ�δ�����touch�����أ�
-    �����Դ򿪻��߹رյ�ƻ��ߵ��ȡ�
+    房间中的**开关（Button）**就是命令模式的一个实现，本例使用命令模式来模拟开关功能
+    ，可控制的对象包括**电灯（Lamp）**和**风扇（Fan）**。用户每次触摸（touch）开关，
+    都可以打开或者关闭电灯或者电扇。
 
 ![](https://img-blog.csdnimg.cn/20191030075605236.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxMTA3NDMz,size_16,color_FFFFFF,t_70)
 
-��ʵ����UMLͼ������ʾ�����������������execute()�ӿڡ����������������࣬�ֱ��ǿ��ƵƵ�LampCommand�Ϳ��Ʒ��ȵ�FanCommand�࣬������������ʵ����execute()�ӿڣ���ִ�п��ص�/�������󡣱����еĵ������ǰ�ťButton��ÿ���û�����touch()�����ذ�ť�������ڷ������󡣱����������ʵ�ֹ������¡�
+本实例的UML图如上所示。抽象命令类仅声明execute()接口。有两个具体命令类，分别是控制灯的LampCommand和控制风扇的FanCommand类，两个具体类中实现了execute()接口，即执行开关灯/风扇请求。本例中的调用者是按钮Button，每次用户触摸touch()）开关按钮，即是在发送请求。本例具体设计实现过程如下。
 
-### �������ࣺ��ƺͷ���
+### 接收者类：电灯和风扇
 
 ```C++
-// �����ߣ������
+// 接收者：电灯类
 class Lamp
 {
 public :
@@ -68,7 +68,7 @@ private:
 	bool lampState;
 };
  
-// �����ߣ�������
+// 接收者：风扇类
 class Fan
 {
 public:
@@ -91,33 +91,33 @@ private:
 };
 ```
 
-### ����������
+### 抽象命令类
 
 ```C++
-    // ���������� Command
+    // 抽象命令类 Command
     class Command
     {
     public:
     	Command(){}
-    	// ��������ӿڣ���������
+    	// 声明抽象接口：发送命令
     	virtual void execute() = 0;
     private:
     	Command *command;
     };
 ```
 
-### ���������� 
+### 具体命令类 
 
 ```C++
-// ���������� LampCommand
+// 具体命令类 LampCommand
 class LampCommand :public Command
 {
 public:
 	LampCommand(){
-		printf("���ؿ��Ƶ��\n");
+		printf("开关控制电灯\n");
 		lamp = new Lamp();
 	}
-	// ʵ��execute()
+	// 实现execute()
 	void execute(){
 		if (lamp->getLampState()){
 			lamp->off();
@@ -130,15 +130,15 @@ private:
 	Lamp *lamp;
 };
  
-// ���������� FanCommand
+// 具体命令类 FanCommand
 class FanCommand :public Command
 {
 public:
 	FanCommand(){
-		printf("���ؿ��Ʒ���\n");
+		printf("开关控制风扇\n");
 		fan = new Fan();
 	}
-	// ʵ��execute()
+	// 实现execute()
 	void execute(){
 		if (fan->getFanState()){
 			fan->off();
@@ -152,21 +152,21 @@ private:
 };
 ```
 
-### �����ߣ�Button
+### 调用者：Button
 
 ```C++
-// ������ Button
+// 调用者 Button
 class Button
 {
 public:
 	Button(){}
-	// ע��������������
+	// 注入具体命令类对象
 	void setCommand(Command *cmd){
 		this->command = cmd;
 	}
-	// �������������ť
+	// 发送命令：触摸按钮
 	void touch(){
-		printf("��������:");
+		printf("触摸开关:");
 		command->execute();
 	}
 private:
@@ -174,7 +174,7 @@ private:
 };
 ```
 
-### �ͻ��˴���ʾ��
+### 客户端代码示例
 
 ```C++
 #include <iostream>
@@ -182,11 +182,11 @@ private:
  
 int main()
 {
-	// ʵ���������ߣ���ť
+	// 实例化调用者：按钮
 	Button *button = new Button();
 	Command *lampCmd, *fanCmd;
  
-	// ��ť���Ƶ��
+	// 按钮控制电灯
 	lampCmd = new LampCommand();
 	button->setCommand(lampCmd);
 	button->touch();
@@ -195,7 +195,7 @@ int main()
  
 	printf("\n\n");
  
-	// ��ť���Ʒ���
+	// 按钮控制风扇
 	fanCmd = new FanCommand();
 	button->setCommand(fanCmd);
 	button->touch();
@@ -208,21 +208,21 @@ int main()
 }
 ```
 
-## �������
+## 命令队列
 
-��ʱ�򣬵��������߷���һ������ʱ���в�ֹһ����������߲�����Ӧ��Qt�źŲۣ�һ���źſ������Ӷ���ۣ�����Щ��������߽����ִ��ҵ�񷽷�����ɶ�����Ĵ�������ʱ���������������ʵ�֡�**���簴ť����ͬʱ���Ƶ�ƺͷ��ȣ���������У����������ǰ�ť���أ������������߲�����Ӧ���ֱ��ǵ�ƺͷ���**��
+有时候，当请求发送者发送一个请求时，有不止一个请求接收者产生响应（Qt信号槽，一个信号可以连接多个槽），这些请求接收者将逐个执行业务方法，完成对请求的处理，此时可以用命令队列来实现。**比如按钮开关同时控制电灯和风扇，这个例子中，请求发送者是按钮开关，有两个接收者产生响应，分别是电灯和风扇**。
 
-���Բο���������е�ʵ�ַ�ʽ������һ����������ࣨCommandQueue�����洢���������󣬲�ͬ��������Ӧ��ͬ����������ߡ�������Ҳ���������������̣�����ע�����������������ķ���setCommandQueue(CommandQueue *cmdQueue)��
+可以参考的命令队列的实现方式是增加一个命令队列类（CommandQueue）来存储多个命令对象，不同命令对象对应不同的命令接收者。调用者也将面对命令队列类编程，增加注入具体命令队列类对象的方法setCommandQueue(CommandQueue *cmdQueue)。
 
-���������չʾ�˰�ť��������ʱ����ƺͷ���ͬʱ��Ϊ����Ľ����ߡ�����������ʾ��
+下面的例子展示了按钮开关请求时，电灯和风扇同时作为请求的接收者。代码如下所示：
 
 ```C++
 #ifdef COMMAND_QUEUE
 /*************************************/
-/*             �������              */
+/*             命令队列              */
 #include <vector>
  
-// ���������
+// 命令队列类
 class CommandQueue
 {
 public:
@@ -242,18 +242,18 @@ private:
  
 };
  
-// ������
+// 调用者
 class Button2
 {
 public:
 	Button2(){}
-	// ע�����������������
+	// 注入具体命令队列类对象
 	void setCommandQueue(CommandQueue *cmdQueue){
 		this->cmdQueue = cmdQueue;
 	}
-	// �������������ť
+	// 发送命令：触摸按钮
 	void touch(){
-		printf("��������:");
+		printf("触摸开关:");
 		cmdQueue->execute();
 	}
 private:
@@ -262,7 +262,7 @@ private:
 #endif
 ```
 
- �ͻ��˴������£�
+ 客户端代码如下：
 
 ```C++
 #ifdef COMMAND_QUEUE
@@ -272,11 +272,11 @@ private:
 	Command *lampCmd2, *fanCmd2;
 	CommandQueue *cmdQueue = new CommandQueue();
  
-	// ��ť���Ƶ��
+	// 按钮控制电灯
 	lampCmd2 = new LampCommand();
 	cmdQueue->addCommand(lampCmd2);
  
-	// ��ť���Ʒ���
+	// 按钮控制风扇
 	fanCmd2 = new FanCommand();
 	cmdQueue->addCommand(fanCmd2);
  
@@ -286,36 +286,36 @@ private:
 #endif
 ```
 
-## ����ģʽ����Ӧ��
+## 命令模式其他应用
 
-### ��¼������־
+### 记录请求日志
 
-����ʷ�����¼��������־���������־���ܶ�����ϵͳ���ṩ����־�ļ�����¼���й����е����̡�һ��ϵͳ�������ϣ���־��Ϊ�˷�������Ĺؼ�����־Ҳ���Ա�����������е������������ÿִ����һ������ʹ���־��ɾ��һ����Ӧ�Ķ���
+将历史请求记录保存在日志里，即请求日志。很多软件系统都提供了日志文件，记录运行过程中的流程。一旦系统发生故障，日志成为了分析问题的关键。日志也可以保存命令队列中的所有命令对象，每执行完一个命令就从日志里删除一个对应的对象。
 
-### ������
+### 宏命令
 
-�������ֽ������������ģʽ������ģʽ�Ľ�ϡ���������һ�����������࣬ӵ��һ������ϣ�������а����˶����������������á�������ͨ����ֱ���������߽���������ͨ�����ĳ�Ա���������ý����ߵķ����������ú������execute()����ʱ���ͱ���ִ��ÿһ��������������execute()��������������ǰ���������У�
+宏命令又叫组合命令，是组合模式和命令模式的结合。宏命令是一个具体命令类，拥有一个命令集合，命令集合中包含了对其他命令对象的引用。宏命令通常不直接与请求者交互，而是通过它的成员来遍历调用接收者的方法。当调用宏命令的execute()方法时，就遍历执行每一个具体命令对象的execute()方法。（类似于前面的命令队列）
 
-## �ܽ�
+## 总结
 
-### �ŵ㣺
+### 优点：
 
-* ����ϵͳ��϶ȣ��������������������߷����������ߺͷ����߲�����ֱ�ӹ��������Զ�������Ӱ�졣
-* ������չ���µ���������׼��뵽ϵͳ�У��ҷ��Ͽ���ԭ��
-* ������ʵ��������л�����
-* Ϊ����ĳ����ͻظ������ṩ��һ�����ʵ�ַ�����
+* 降低系统耦合度，将命令的请求者与接收者分离解耦，请求者和发送者不存在直接关联，各自独立互不影响。
+* 便于扩展：新的命令很容易加入到系统中，且符合开闭原则。
+* 较容易实现命令队列或宏命令。
+* 为请求的撤销和回复操作提供了一种设计实现方案。
 
-### ȱ�㣺
+### 缺点：
 
-* ����ģʽ���ܵ���ϵͳ���й���ľ��������࣬������ϵͳ�ж����������
+* 命令模式可能导致系统中有过多的具体命令类，增加了系统中对象的数量。
 
-### ���û�����
+### 适用环境：
 
-* ϵͳ��Ҫ���������ߺͽ����߽��ʹ�÷����ߺͽ����߻���Ӱ�졣
-* ϵͳ��Ҫ�ڲ�ͬʱ��ָ�����󡢽������ŶӺ�ִ������
-* ϵͳ��Ҫ֧������ĳ����ͻָ�������
-* ϵͳ��Ҫ��һ����������һ���γɺ����
+* 系统需要将请求发送者和接收者解耦，使得发送者和接收者互不影响。
+* 系统需要在不同时间指定请求、将请求排队和执行请求。
+* 系统需要支持命令的撤销和恢复操作。
+* 系统需要将一组操作组合在一起形成宏命令。
 
-|[��һƪ](./017_ChainOfResponsibility.md)|[Ŀ¼](./index.md)|[��һƪ](./019_InterpreterPattern.md)|
+|[上一篇](./017_ChainOfResponsibility.md)|[目录](./index.md)|[下一篇](./019_InterpreterPattern.md)|
 |:---:|:---:|:---:|
-|[ְ����ģʽ](./017_ChainOfResponsibility.md)|[Ŀ¼](./index.md)|[������ģʽ](./019_InterpreterPattern.md)|
+|[职责链模式](./017_ChainOfResponsibility.md)|[目录](./index.md)|[解释器模式](./019_InterpreterPattern.md)|

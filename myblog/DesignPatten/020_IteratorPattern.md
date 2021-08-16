@@ -1,45 +1,45 @@
-# ������ģʽ
+# 迭代器模式
 
-|[��һƪ](./019_InterpreterPattern.md)|[Ŀ¼](./index.md)|[��һƪ](./021_MediatorPattern.md)|
+|[上一篇](./019_InterpreterPattern.md)|[目录](./index.md)|[下一篇](./021_MediatorPattern.md)|
 |:---:|:---:|:---:|
-|[������ģʽ](./019_InterpreterPattern.md)|[Ŀ¼](./index.md)|[�н���ģʽ](./021_MediatorPattern.md)|
+|[解释器模式](./019_InterpreterPattern.md)|[目录](./index.md)|[中介者模式](./021_MediatorPattern.md)|
 
-    д���벻��ʹ������������Ƶļ��϶���ɣ�ÿ��Ҫ����һ��������ô�죿
-    For ѭ��������whileѭ����һ��һ������ÿ��λ�õ�Ԫ�أ�ֱ������ĩβ��
-    STL����������ר�ŵĵ���������Ծ���ļ���������ж�Ӧʹ�õĵ�������
-    STL�ĵ������ṩ�˷ḻ�ı�������������ʼ��϶������λԪ�ء�ĩλԪ�ء�
-    ָ��λ�õ�Ԫ�ء���һ��Ԫ�ء�����ô�����ǲ��Ǹо����˵��������������������������ˣ�
+    写代码不少使用数组或者类似的集合对象吧？每次要遍历一遍数组怎么办？
+    For 循环！或者while循环，一个一个访问每个位置的元素，直到数组末尾。
+    STL里面甚至有专门的迭代器，针对具体的集合类对象，有对应使用的迭代器。
+    STL的迭代器提供了丰富的遍历方法，如访问集合对象的首位元素、末位元素、
+    指定位置的元素、下一个元素……怎么样，是不是感觉有了迭代器，遍历方法不再是难事了？
 
-## ������ģʽ����
+## 迭代器模式概述
 
-�������ճ���������о���ʹ�ã�ͨ������Ҫ��һ�����кܶ����ʵ���ļ��ϣ���Ϊ**�ۺ϶���**�����з��ʻ��ȡ������Ҫȡ�ۺ϶������λԪ�ء��ж��Ƿ��ھۺ϶����ĩβ�ȡ���Ծۺ϶���ı�����������ģʽ��һ�ֺ���Ч�Ľ��������Ҳ��һ��ʹ��Ƶ�ʺܸߵ����ģʽ��
+遍历在日常编码过程中经常使用，通常是需要对一个具有很多对象实例的集合（称为**聚合对象**）进行访问或获取。比如要取聚合对象的首位元素、判断是否在聚合对象的末尾等。针对聚合对象的遍历，迭代器模式是一种很有效的解决方案，也是一种使用频率很高的设计模式。
 
-    ������ģʽ��
+    迭代器模式：
 
-    �ṩһ�ַ���˳�����һ���ۺ϶����еĸ���Ԫ�أ����ֲ���¶�ö�����ڲ���ʾ��
+    提供一种方法顺序访问一个聚合对象中的各个元素，而又不暴露该对象的内部表示。
 
-ͨ����������������Խ����ݵı������ܴӾۺ϶����з������������һ�����ۺ϶���ֻ�踺��洢���ݣ���������������������ݣ�ʹ�þۺ϶����ְ����ӵ�һ�����ϵ�һְ��ԭ��
+通过引入迭代器，可以将数据的遍历功能从聚合对象中分离出来，这样一来，聚合对象只需负责存储数据，而迭代器对象负责遍历数据，使得聚合对象的职责更加单一，符合单一职责原则。
 
-## ������ģʽ�ṹ
+## 迭代器模式结构
 
-������ģʽ�ṹ�а����ۺϺ͵�����������εĽṹ��Ϊ������չ��������ģʽ�����͹�������ģʽ��ϡ�������ģʽ��UMLͼ���¡���ͼ��֪��������ģʽ�����¼�����ɫ��
+迭代器模式结构中包含聚合和迭代器两个层次的结构。为方便扩展，迭代器模式常常和工厂方法模式结合。迭代器模式的UML图如下。有图可知，迭代器模式有以下几个角色：
 
 ![](https://img-blog.csdnimg.cn/2019110310444590.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxMTA3NDMz,size_16,color_FFFFFF,t_70)
 
-* **Iterator�������������**�������˷��ʺͱ����ۺ϶���Ԫ�صĽӿڣ���first()�������ڷ��ʾۺ϶����е�һ��Ԫ�أ�next()�������ڷ�����һ��Ԫ�أ�hasNext()�ж��Ƿ�����һ��Ԫ�أ�currentItem()�������ڻ�ȡ��ǰԪ�ء�
-* **ConcreteIterator�������������**��ʵ�ֳ�������������ķ�����ͨ������������л�ר����һ����������Ϊ�α꣩����¼�������ھۺ϶�����������λ�á�
-* **Aggregate������ۺ��ࣩ**�����ڴ洢�͹���Ԫ�ض�������һ�������������Ľӿڣ���ʵ��һ����������������Ľ�ɫ��
-* **ConcreteAggregate������ۺ��ࣩ**��ʵ���˷���createIterator()���÷�������һ����þ���ۺ����Ӧ�ľ��������ConcreteIterator��ʵ����
+* **Iterator（抽象迭代器）**：声明了访问和遍历聚合对象元素的接口，如first()方法用于访问聚合对象中第一个元素，next()方法用于访问下一个元素，hasNext()判断是否还有下一个元素，currentItem()方法用于获取当前元素。
+* **ConcreteIterator（具体迭代器）**：实现抽象迭代器声明的方法，通常具体迭代器中会专门用一个变量（称为游标）来记录迭代器在聚合对象中所处的位置。
+* **Aggregate（抽象聚合类）**：用于存储和管理元素对象，声明一个创建迭代器的接口，其实是一个抽象迭代器工厂的角色。
+* **ConcreteAggregate（具体聚合类）**：实现了方法createIterator()，该方法返回一个与该具体聚合类对应的具体迭代器ConcreteIterator的实例。
 
-## ������ģʽ����ʵ��
+## 迭代器模式代码实例
 
-    ���ӻ�ң�����ǵ�������һ����ʵӦ�ã�ͨ��������ʵ�ֶԵ���Ƶ�����ϵı������������ӻ����Կ���һ���洢Ƶ���ľۺ϶��󡣱���Jungle�����õ�����ģʽ��ģ��ң������������Ƶ���Ĺ��̡�
+    电视机遥控器是迭代器的一个现实应用，通过它可以实现对电视频道集合的遍历操作，电视机可以看成一个存储频道的聚合对象。本例Jungle将采用迭代器模式来模拟遥控器操作电视频道的过程。
 
-�����ԣ�ң������һ������ĵ�������������һ��Ƶ��previous() ����һ��Ƶ��next()����ǰƵ��currentChannel()�ȹ��ܣ���Ҫ�����ľۺ϶����ǵ���Ƶ���ļ��ϣ������ӻ���������UMLͼ���£�
+很明显，遥控器是一个具体的迭代器，具有上一个频道previous() 、下一个频道next()、当前频道currentChannel()等功能；需要遍历的聚合对象是电视频道的集合，即电视机。本例的UML图如下：
 
 ![](https://img-blog.csdnimg.cn/20191103141040241.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxMTA3NDMz,size_16,color_FFFFFF,t_70)
 
-### ����ۺ���;���ۺ���
+### 抽象聚合类和具体聚合类
 
 ```C++
 #ifndef __AGGREGATE_H__
@@ -48,11 +48,11 @@
 #include <vector>
 using namespace std;
  
-// ǰ����������Ϊ�����໥������
+// 前向声明，因为两个类互相引用
 class Iterator;
 class RemoteControl;
  
-// ����ۺ��� Aggregate
+// 抽象聚合类 Aggregate
 class Aggregate
 {
 public:
@@ -60,15 +60,15 @@ public:
 	virtual Iterator* createIterator() = 0;
 };
  
-// ����ۺ��� Television
+// 具体聚合类 Television
 class Television :public Aggregate
 {
 public:
 	Television();
 	Television(vector<string> iChannelList);
-	// ʵ�ִ���������
+	// 实现创建迭代器
 	Iterator* createIterator();
-	// ��ȡ�ܵ�Ƶ����Ŀ
+	// 获取总的频道数目
 	int getTotalChannelNum();
 	void play(int i);
 private:
@@ -78,7 +78,7 @@ private:
 #endif //__AGGREGATE_H__
 ```
 
-ʵ�֣�
+实现：
 
 ```C++
 #include "Iterator.h"
@@ -100,19 +100,19 @@ int Television::getTotalChannelNum(){
 }
  
 void Television::play(int i){
-	printf("���ڲ��ţ�%s����\n", channelList[i].c_str());
+	printf("现在播放：%s……\n", channelList[i].c_str());
 }
 ```
 
-### ���������
+### 抽象迭代器
 
 ```C++
-// ���������
+// 抽象迭代器
 class Iterator
 {
 public:
 	Iterator(){}
-	// ���������������
+	// 声明抽象遍历方法
 	virtual void first() = 0;
 	virtual void last() = 0;
 	virtual void next() = 0;
@@ -123,10 +123,10 @@ public:
 };
 ```
 
-### �����������RemoteControl
+### 具体迭代器：RemoteControl
 
 ```C++
-// ң���������������
+// 遥控器：具体迭代器
 class RemoteControl :public Iterator
 {
 public:
@@ -136,7 +136,7 @@ public:
 		cursor = -1;
 		totalNum = tv->getTotalChannelNum();
 	}
-	// ʵ�ָ�����������
+	// 实现各个遍历方法
 	void first(){
 		cursor = 0;
 	}
@@ -159,16 +159,16 @@ public:
 		tv->play(cursor);
 	}
 private:
-	// �α�
+	// 游标
 	int cursor;
-	// �ܵ�Ƶ����Ŀ
+	// 总的频道数目
 	int totalNum;
-	// ����
+	// 电视
 	Television* tv;
 };
 ```
 
-### �ͻ��˴���ʾ������� 
+### 客户端代码示例及结果 
 
 ```C++
 #include <iostream>
@@ -176,16 +176,16 @@ private:
  
 int main()
 {
-	vector<string> channelList = { "����Ƶ��", "�ƾ�Ƶ��", "����Ƶ��", "��ӰƵ��", "����Ƶ��", "ũҵƵ��", "�Ĵ�����", "�ɶ�����" };
-	// ��������
+	vector<string> channelList = { "新闻频道", "财经频道", "体育频道", "电影频道", "音乐频道", "农业频道", "四川卫视", "成都卫视" };
+	// 创建电视
 	Television *tv = new Television(channelList);
-	// ����ң����
+	// 创建遥控器
 	Iterator *remoteControl = tv->createIterator();
  
-	// ˳�����
-	printf("˳�����:\n");
+	// 顺序遍历
+	printf("顺序遍历:\n");
 	remoteControl->first();
-	// ������������Ƶ��
+	// 遍历电视所有频道
 	while (remoteControl->hasNext()){
 		remoteControl->currentChannel();
 		remoteControl->next();
@@ -193,10 +193,10 @@ int main()
  
 	printf("\n\n");
  
-	// �������
-	printf("�������:\n");
+	// 逆序遍历
+	printf("逆序遍历:\n");
 	remoteControl->last();
-	// ������������Ƶ��
+	// 遍历电视所有频道
 	while (remoteControl->hasPrevious()){
 		remoteControl->currentChannel();
 		remoteControl->previous();
@@ -208,6 +208,6 @@ int main()
 }
 ```
 
-|[��һƪ](./019_InterpreterPattern.md)|[Ŀ¼](./index.md)|[��һƪ](./021_MediatorPattern.md)|
+|[上一篇](./019_InterpreterPattern.md)|[目录](./index.md)|[下一篇](./021_MediatorPattern.md)|
 |:---:|:---:|:---:|
-|[������ģʽ](./019_InterpreterPattern.md)|[Ŀ¼](./index.md)|[�н���ģʽ](./021_MediatorPattern.md)|
+|[解释器模式](./019_InterpreterPattern.md)|[目录](./index.md)|[中介者模式](./021_MediatorPattern.md)|

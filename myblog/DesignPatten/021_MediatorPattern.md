@@ -1,74 +1,74 @@
-# �н���ģʽ
+# 中介者模式
 
-|[��һƪ](./020_IteratorPattern.md)|[Ŀ¼](./index.md)|[��һƪ](./022_MementoPattern.md)|
+|[上一篇](./020_IteratorPattern.md)|[目录](./index.md)|[下一篇](./022_MementoPattern.md)|
 |:---:|:---:|:---:|
-|[������ģʽ](./020_IteratorPattern.md)|[Ŀ¼](./index.md)|[����¼ģʽ](./022_MementoPattern.md)|
+|[迭代器模式](./020_IteratorPattern.md)|[目录](./index.md)|[备忘录模式](./022_MementoPattern.md)|
 
-    �뿪ѧУ�μӹ���֮ǰ����һ������һ��ʱ���������⣬JungleҲ����ˡ�
+    离开学校参加工作之前，你一定是有一段时间是在找租，Jungle也是如此。
 
-    JungleΪ���ҵ����ʵķ��ӣ����ŵ�����һ��С��һ��С����ȥ�������ʱ�����
-    ��������С���ſ�չ���ϵķ�������ϵ��ʽȥ�ҷ������������Ѿ���ȥ������ˣ�
-    ��Jungle�����������Ǿ��ú��鷳���鷳�������������������ϵ����������
-    ͨ��¼��΢�ŵüӺö෿������
+    Jungle为了找到合适的房子，沿着地铁线一个小区一个小区的去问门卫问保安，
+    或者照着小区门口展板上的房东的联系方式去找房东……此事已经过去大半年了，
+    但Jungle现在想来还是觉得很麻烦！麻烦在哪里？得亲自走亲自联系各个房东，
+    通信录和微信得加好多房东……
 
-    ��ʵ�и�ʡ�µİ취���Ǿ������н飬�ⷿ�н��Ķ����ǡ���Ȼ����Ҫԭ�򣩣�
-    ���ǵ�ȷΪ���ʡ�˺ܶ��£���ʵҲΪ����ʡ�˺ܶ��¡�
+    其实有更省事的办法，那就是找中介，租房中介哪儿都是。虽然贵（主要原因），
+    但是的确为租客省了很多事，其实也为房东省了很多事。
 
 ![](https://img-blog.csdnimg.cn/20191103193458934.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxMTA3NDMz,size_16,color_FFFFFF,t_70)
 
-## �н���ģʽ���
+## 中介者模式简介
 
-����Jungle�ⷿ����������ͼ�����Jungle�Լ�ȥ�ⷿ���ú͸����������Խ����������һ����ͼ�����Ҳ���Լ��ҷ���ͬ��Ҳ�úͺܶ෿���򽻵�������Ҳ��һ�����ú��ڶ಻ͬ�������ϵ��**������н����ˣ�������ֻ��Ҫȥ�н�������ע��һ�£��Լ��ķ������Ķ���ʲô������ʩ���۸���٣���ok�ˣ�Jungle�ͼ�����Ҳֻ��Ҫ��һ���˴򽻵����Ǿ����н顣�н�ĳ���ʹ���߶�ʡȥ�˲����¡�**
+上述Jungle租房的例子如上图，如果Jungle自己去租房，得和各个房东亲自交互，如果另一个租客贱萌兔也在自己找房，同样也得和很多房东打交道。房东也是一样，得和众多不同的租客联系。**如果有中介者了，房东们只需要去中介者那里注册一下，自己的房子在哪儿、什么户型设施、价格多少，就ok了；Jungle和贱萌兔也只需要和一个人打交道，那就是中介。中介的出现使两边都省去了不少事。**
 
-�������ģʽ�У�Ҳ��һ�����ƵĽ���������Ǿ����н���ģʽ.
+软件设计模式中，也有一种类似的解决方案，那就是中介者模式.
 
-    �н���ģʽ��
+    中介者模式：
 
-    ����һ����������װһϵ�ж���Ľ������н���ģʽʹ��������֮�䲻��Ҫ��ʾ���໥���ã��Ӷ�ʹ�������ɢ�������û����Զ����ظı�����֮��Ľ�����
+    定义一个对象来封装一系列对象的交互。中介者模式使各个对象之间不需要显示地相互引用，从而使其耦合松散，而且用户可以独立地改变它们之间的交互。
 
-���һ��ϵͳ���������֮����ڶ�Զ���໥��ϵ�����Խ�����֮���һЩ������Ϊ�Ӹ��������з�����������з�װ��һ���н��߶����У�ʹ�������ɢ�������н���ͳһЭ����ͨ���н��ߣ�����֮��Ķ�Զ��ϵ�ͼ�����Ը��򵥵�һ�Զ��ϵ�� 
+如果一个系统里各个对象之间存在多对多的相互关系，可以将对象之间的一些交互行为从各个对象中分离出来，集中封装在一个中介者对象中，使其耦合松散，并由中介者统一协调。通过中介者，对象之间的多对多关系就简化了相对更简单的一对多关系。 
 
-## �н���ģʽ�ṹ
+## 中介者模式结构
 
-�н���ģʽ��UMLͼ���£�Ϊ�˱�����չ��ϵͳ�����˳����н��ߡ�
+中介者模式的UML图如下，为了便于扩展，系统引入了抽象中介者。
 
 ![](https://img-blog.csdnimg.cn/20191103194143491.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxMTA3NDMz,size_16,color_FFFFFF,t_70)
 
-��ͼ��֪���н���ģʽ��Ҫ�����½�ɫ��
+由图可知，中介者模式主要有以下角色：
 
-* **Mediator�������н��ߣ�**������һ�����������ͬ�¶���֮�佻���Ľӿڣ�ͨ������һ��ע�᷽������������ͬ�¶���
-* **ConcreteMediator�������н��ߣ�**��ʵ������Ľӿڣ�Э������ͬ�¶�����ʵ��Э����Ϊ��ά�ֶԸ���ͬ�¶�������ã�
-* **Colleague������ͬ���ࣩ**����������ͬ���๫�еĽӿڣ�**ͬʱά����һ���Գ����н����������**��
-* **ConcreteColleague������ͬ���ࣩ**�� ����ʵ�ֽӿڣ�����ͬ����ֻ�����н���ͨ�ţ�ͨ���н������������ͬ�����ͨ�š�
+* **Mediator（抽象中介者）**：声明一个用于与各个同事对象之间交互的接口，通常声明一个注册方法，用于增加同事对象；
+* **ConcreteMediator（具体中介者）**：实现上面的接口，协调各个同事对象来实现协作行为，维持对各个同事对象的引用；
+* **Colleague（抽象同事类）**：声明各个同事类公有的接口，**同时维持了一个对抽象中介者类的引用**；
+* **ConcreteColleague（具体同事类）**： 具体实现接口，具体同事类只需与中介者通信，通过中介者完成与其他同事类的通信。
 
-**�н���ģʽ�ĺ��������������н�����**���н�����е���������ε�ְ��
+**中介者模式的核心在于引入了中介者类**，中介者类承担了两个层次的职责：
 
-* **�ṹ������ת����**��ͨ���н��ߵ���ת������ͬ��֮�䲻�����໥��ʾ���û����ã�ֻ��ͨ���н���ʵ�ּ�ӵ��õ�Ŀ�ģ�
-* **��Ϊ����Э������**���н��߿��Խ�һ���ؽ�ͬ��֮��Ĺ�ϵ���з�װ��ͬ�¿���һ�µغ��н��߽��н�����������ָ���н��߾������β������н��߸��ݷ�װ�������ڲ���Э���߼���ͬ�µ������һ����������ͬ�³�Ա֮��Ĺ�ϵ��Ϊ���з���ͷ�װ��
+* **结构上起中转作用**：通过中介者的中转，各个同事之间不必再相互显示调用或引用，只需通过中介者实现间接调用的目的；
+* **行为上起协调作用**：中介者可以进一步地将同事之间的关系进行封装，同事可以一致地和中介者进行交互，而不必指出中介者具体该如何操作，中介者根据封装在自身内部的协调逻辑对同事的请求进一步处理，将同事成员之间的关系行为进行分离和封装。
 
-## �н���ģʽ����ʵ��
+## 中介者模式代码实例
 
-����Jungle�������н���ģʽģ�⡰��͡��������н顪��������֮��İ������
+本节Jungle将采用中介者模式模拟“租客——房租中介——房东”之间的爱恨情仇！
 
-�������Ĵ�����Խϸ��ӣ����������Դ���https://github.com/FengJungle/DesignPattern��
+（本例的代码相对较复杂，具体代码资源请见https://github.com/FengJungle/DesignPattern）
 
-    Jungle�ͼ�������Ҫͨ�������н飨Agency���ⷿ����Ҫȥ�н鴦�˽ⷿ����Landlord��
-    ����Ϣ���������۸񣬵�ַ����ϵ��ʽ���������ǣ�Landlord����Ҫ���н鴦
-    ע���Լ��ķ�Դ��ͬʱҲ���Դ��н鴦�˽���ͣ�Tenant������Ϣ����������
+    Jungle和贱萌兔想要通过房屋中介（Agency）租房，需要去中介处了解房东（Landlord）
+    的信息（姓名，价格，地址和联系方式）；房东们（Landlord）需要在中介处
+    注册自己的房源，同时也可以从中介处了解租客（Tenant）的信息（姓名）。
 
-������UMLͼ���£� 
+本例的UML图如下： 
 
 ![](https://img-blog.csdnimg.cn/20191104073214663.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxMTA3NDMz,size_16,color_FFFFFF,t_70)
 
-### ����ͷ�ļ�
+### 公共头文件
 
-Ϊ���ַ�������ͣ�Jungle������һ��ö�����ͺͶ�Ӧ��setter��getter������
+为区分房东和租客，Jungle定义了一个枚举类型和对应的setter、getter方法：
 
 ```C++
 #ifndef __COMMON_H__
 #define __COMMON_H__
  
-// ����ͷ�ļ�
+// 公共头文件
  
 #include <vector>
 using namespace std;
@@ -83,29 +83,29 @@ enum PERSON_TYPE
 #endif  //__COMMON_H__
 ```
 
-### �н���
+### 中介者
 
-#### �����н���
+#### 抽象中介者
 
 ```C++
-// �����н���
+// 抽象中介者
 class Mediator
 {
 public:
 	Mediator(){}
-	// �������󷽷�
+	// 声明抽象方法
 	virtual void operation(Colleague*) = 0;
-	// ����ע�᷽��
+	// 声明注册方法
 	virtual void registerMethod(Colleague*) = 0;
 };
 ```
 
-#### �����н���Agency 
+#### 具体中介者Agency 
 
-�����н��߾�����ʵ���н�����࣬�������з�����������landlordList�������������tenantList�������������ͨ��registerMethod()���н鴦�Ǽ�ע�ᡣͬʱ����������ѯ���н������Ϣ�����Ҳ�������н�ѯ�ʷ�����Ϣ��
+具体中介者就是真实的中介对象类，他手里有房东的名单（landlordList）和租客名单（tenantList），房东和租客通过registerMethod()在中介处登记注册。同时，房东可以询问中介租客信息，租客也可以向中介询问房东信息。
 
 ```C++
-// �����н���
+// 具体中介者
 class Agency:public Mediator
 {
 public:
@@ -144,16 +144,16 @@ private:
 };
 ```
 
-### ͬ����
+### 同事类
 
-#### ����ͬ����
+#### 抽象同事类
 
 ```C++
-// ǰ������
+// 前向声明
 class Mediator;
 class Agency;
  
-// ����ͬ����
+// 抽象同事类
 class Colleague
 {
 public:
@@ -178,10 +178,10 @@ private:
 };
 ```
 
-#### ����ͬ���ࡪ��������Landlord��
+#### 具体同事类——房东（Landlord）
 
 ```C++
-// ����ͬ���ࣺ����
+// 具体同事类：房东
 class Landlord :public Colleague
 {
 public:
@@ -197,7 +197,7 @@ private:
 };
 ```
 
-ʵ�֣�
+实现：
 
 ```C++
 #include "Colleague.h"
@@ -221,22 +221,22 @@ Landlord::Landlord(string iName, int iPrice,
 }
  
 void Landlord::answer(){
-	printf("����������%s, ���⣺%d, ��ַ��%s, ��ϵ�绰��%s\n",
+	printf("房东姓名：%s, 房租：%d, 地址：%s, 联系电话：%s\n",
 		name.c_str(), price, address.c_str(), phoneNumber.c_str());
 }
  
 void Landlord::ask(){
-	printf("����%s�鿴�����Ϣ��\n",name.c_str());
+	printf("房东%s查看租客信息：\n",name.c_str());
 	(this->getMediator())->operation(this);
 }
 ```
 
-#### ����ͬ���ࡪ����ͣ�Tenant�� 
+#### 具体同事类——租客（Tenant） 
 
-������
+声明：
 
 ```C++
-    // ����ͬ���ࣺ���
+    // 具体同事类：租客
     class Tenant :public Colleague
     {
     public:
@@ -249,7 +249,7 @@ void Landlord::ask(){
     };
 ```
 
-ʵ�֣�
+实现：
 
 ```C++
 #include "Colleague.h"
@@ -266,16 +266,16 @@ Tenant::Tenant(string iName){
 }
  
 void Tenant::ask(){
-	printf("���%sѯ�ʷ�����Ϣ\n", name.c_str()); 
+	printf("租客%s询问房东信息\n", name.c_str()); 
 	(this->getMediator())->operation(this);
 }
  
 void Tenant::answer(){
-	printf("���������%s\n", name.c_str());
+	printf("租客姓名：%s\n", name.c_str());
 }
 ```
 
-### �ͻ��˴���ʾ����Ч��
+### 客户端代码示例及效果
 
 ```C++
 #include <iostream>
@@ -284,27 +284,27 @@ void Tenant::answer(){
  
 int main()
 {
-	// �����ⷿ�н�
+	// 创建租房中介
 	Agency *mediator = new Agency();
  
-	// ����3λ����
-	Landlord *fangdong1 = new Landlord("����", 1350, "�ɶ���˫����", "1351025");
-	Landlord *fangdong2 = new Landlord("����", 1500, "�ɶ��������", "1378390");
-	Landlord *fangdong3 = new Landlord("�ŷ�", 1000, "�ɶ�����Ȫ��", "1881166");
+	// 创建3位房东
+	Landlord *fangdong1 = new Landlord("刘备", 1350, "成都市双流区", "1351025");
+	Landlord *fangdong2 = new Landlord("关羽", 1500, "成都市武侯区", "1378390");
+	Landlord *fangdong3 = new Landlord("张飞", 1000, "成都市龙泉驿", "1881166");
 	fangdong1->setMediator(mediator);
 	fangdong2->setMediator(mediator);
 	fangdong3->setMediator(mediator);
-	// �������н鴦�Ǽ�ע�᷿Դ��Ϣ
+	// 房东在中介处登记注册房源信息
 	mediator->registerMethod(fangdong1);
 	mediator->registerMethod(fangdong2);
 	mediator->registerMethod(fangdong3);
  
-	// ������λ���Jungle�ͼ�����
+	// 创建两位租客Jungle和贱萌兔
 	Tenant *jungle = new Tenant("Jungle");
-	Tenant *jianmengtu = new Tenant("������");
+	Tenant *jianmengtu = new Tenant("贱萌兔");
 	jungle->setMediator(mediator);
 	jianmengtu->setMediator(mediator);
-	// Jungle�ͼ��������н鴦�Ǽ�������Ϣ
+	// Jungle和贱萌兔在中介处登记求租信息
 	mediator->registerMethod(jungle);
 	mediator->registerMethod(jianmengtu);
  
@@ -318,23 +318,23 @@ int main()
 }
 ```
 
-## �ܽ�
+## 总结
 
-### �ŵ㣺
+### 优点：
 
-* ���˶���֮��Ľ�����ͨ���н��ߣ�����֮��Ķ�Զ��ϵ�ͼ�����Ը��򵥵�һ�Զ��ϵ��
-* �ɽ�����ͬ�¶��������ڸ���ͬ��֮�����ɢ��ϣ��ɶ����ظı�͸���ÿһ��ͬ�¶��������µ��н��ߺ�ͬ�¶��ȽϷ��㣬���Ͽ���ԭ��
-* �ɼ����������ɣ���ԭ���ֲ��ڶ������֮�����Ϊ��װ��һ��ֻ�������µľ����н�����Ϳ��Ըı���Щ��Ϊ�� 
+* 简化了对象之间的交互，通过中介者，对象之间的多对多关系就简化了相对更简单的一对多关系；
+* 可将各个同事对象解耦，利于各个同事之间的松散耦合，可独立地改变和复用每一个同事对象，增加新的中介者和同事都比较方便，符合开闭原则；
+* 可减少子类生成，将原本分布于多个对象之间的行为封装在一起，只需生成新的具体中介者类就可以改变这些行为。 
 
-### ȱ�㣺
+### 缺点：
 
-* �����н������а����˴�����ͬ��֮�佻����ϸ�ں��߼�������ʹ���н�����ܸ������������Թ���ά����
+* 具体中介者类中包含了大量与同事之间交互的细节和逻辑，可能使得中介者类很复杂以至于难以管理维护。
 
-### ���û�����
+### 适用环境：
 
-* ϵͳ�еĶ���֮����ڸ��ӵĽ�����ϵ��ʹ��ϵͳ���߼����۸��ӣ����Թ�����
-* һ�����������������ܶ���󣬲�ֱ�Ӻ���Щ���󽻻������¸ö������Ը��á�
+* 系统中的对象之间存在复杂的交互关系，使得系统内逻辑错综复杂，难以管理；
+* 一个对象引用了其他很多对象，并直接和这些对象交互，导致该对象难以复用。
 
-|[��һƪ](./020_IteratorPattern.md)|[Ŀ¼](./index.md)|[��һƪ](./022_MementoPattern.md)|
+|[上一篇](./020_IteratorPattern.md)|[目录](./index.md)|[下一篇](./022_MementoPattern.md)|
 |:---:|:---:|:---:|
-|[������ģʽ](./020_IteratorPattern.md)|[Ŀ¼](./index.md)|[����¼ģʽ](./022_MementoPattern.md)|
+|[迭代器模式](./020_IteratorPattern.md)|[目录](./index.md)|[备忘录模式](./022_MementoPattern.md)|

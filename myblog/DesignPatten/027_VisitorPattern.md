@@ -1,65 +1,65 @@
-# ������ģʽ
+# 访问者模式
 
-|[��һƪ](./026_TemplateMethodPattern.md)|[Ŀ¼](./index.md)|[��һƪ]()|
+|[上一篇](./026_TemplateMethodPattern.md)|[目录](./index.md)|[下一篇]()|
 |:---:|:---:|:---:|
-|[ģ�巽��ģʽ](./026_TemplateMethodPattern.md)|[Ŀ¼](./index.md)|[]()|
+|[模板方法模式](./026_TemplateMethodPattern.md)|[目录](./index.md)|[]()|
 
-    ŷҮ������Jungle����ҵ���������ˣ���ҵ��ʲô�أ��������һ��ϰ��ᡣ
-    Jungle����֮�󣬵��üҳ����ϰ��Ტǩ�֣��ڶ��콻��ѧУ���鳤�ó���
-    �����ҵ�Ƿ����ꡢ�ҳ��Ƿ�ǩ�֣�Ȼ����ʦ��������ҵ�Ƿ���ȷ�����������֡�
+    欧耶！这周Jungle的作业终于做完了！作业是什么呢？就是完成一个习题册。
+    Jungle做完之后，得让家长检查习题册并签字；第二天交到学校，组长得初步
+    检查作业是否做完、家长是否签字，然后老师会评阅作业是否正确，并给出评分。
 
-    ������ôһ��ϰ��ᣬ���Ǿ��˶����˵��ְ���
+    就是这么一个习题册，这是经了多少人的手啊！
 
-                Jungle�������ϰ����ϵ��⣻
+                Jungle——完成习题册上的题；
 
-                Jungle�ҳ����������ӵ���ҵ������ϰ�����ǩ�֣�
+                Jungle家长——检查儿子的作业，并在习题册上签字；
 
-                �鳤�����������Jungle��ϰ����Ƿ���ɣ�
+                组长——初步检查Jungle的习题册是否完成；
 
-                ��ʦ��������ϰ��ᣬ�������֡�
+                老师——评阅习题册，给出评分。
 
-**ͬ��һ������ϰ��ᣩ����ͬ���˶�ȥ�����������ҷ��ʵķ�ʽ��ͬ**��Jungle��Ϊ�������ҵ��Jungle�ְ���Ϊ��ǩ�֣��鳤��Ϊ�˼��Jungle�Ƿ���ɣ�����ʦ��Ϊ�����֡� ÿһ���˶������˷����ߵĽ�ɫ��
+**同样一个对象（习题册），不同的人都去访问它，并且访问的方式不同**，Jungle是为了完成作业，Jungle爸爸是为了签字，组长是为了检查Jungle是否完成，而老师是为了评分。 每一个人都扮演了访问者的角色。
 
-ʲô�������ߣ�
+什么？访问者？
 
-## ������ģʽ���
+## 访问者模式简介
 
-������������ϰ��ᣬ���������Ҳ��Ҫ������������ϰ���Ķ���ṹ����ͬ�Ķ����Ӧ��ͬ�Ĵ��������ģʽ�У�**������ģʽ����Ϊ���Բ�ͬ�ķ�ʽ���������ӵĶ���ṹ**��
+类似于上述的习题册，软件设计中也需要这样的类似于习题册的对象结构，不同的对象对应不同的处理。设计模式中，**访问者模式就是为了以不同的方式来操作复杂的对象结构**。
 
-������ģʽ��һ�ֽ�Ϊ���ӵ���Ϊ�����ģʽ������**������**��**������Ԫ��**������Ҫ�Ľ�ɫ�������ʵ�Ԫ�س����в�ͬ�����ͣ���ͬ�ķ����߿��Զ������ṩ��ͬ�ķ��ʷ�ʽ��������Ԫ��ͨ�����ǵ������ڣ������Լ��ϵ���ʽ������һ������ṹ�У������߿��Ա����ö���ṹ��������������е�ÿһ��Ԫ�ء�
+访问者模式是一种较为复杂的行为型设计模式，具有**访问者**和**被访问元素**两个主要的角色。被访问的元素常常有不同的类型，不同的访问者可以对它们提供不同的访问方式。被访问元素通常不是单独存在，而是以集合的形式存在于一个对象结构中，访问者可以遍历该对象结构，以逐个访问其中的每一个元素。
 
-    ������ģʽ��
+    访问者模式：
 
-    ��ʾһ��������ĳ����ṹ�еĸ���Ԫ�صĲ�����������ģʽ���û������ڲ��ı��Ԫ�ص�ǰ���¶�����������ЩԪ�ص��²�����
+    表示一个作用于某对象结构中的各个元素的操作。访问者模式让用户可以在不改变各元素的前提下定义作用于这些元素的新操作。
 
-## ������ģʽ�ṹ
+## 访问者模式结构
 
-������ģʽ�Ľṹ��Խϸ��ӣ���ɫ�����¼�����
+访问者模式的结构相对较复杂，角色有如下几个：
 
-* **Visitor����������ߣ�**�������࣬�����˷��ʶ���ṹ�в�ͬ����Ԫ�صķ������ɷ������ƿ�֪�÷��������ʶ���ṹ�е�ĳ������Ԫ�أ�
-* **ConcreteVisitor����������ߣ�**������ĳ������Ԫ�صķ����ߣ�ʵ�־���ķ��ʷ�����
-* **Element������Ԫ�أ�**�������࣬һ������һ��accept()�ķ��������ڽ��ܷ����ߵķ��ʣ�accept()����������һ����������ߵ�ָ����Ϊ������
-* **ConcreteElement������Ԫ�أ�**����Ծ��屻���ʵ�Ԫ�أ�ʵ��accept()������
-* **ObjectStructure������ṹ��**��Ԫ�صļ��ϣ��ṩ�˱�������ṹ������Ԫ�صķ���������ṹ�洢�˲�ͬ���͵�Ԫ�ض����Թ���ͬ�ķ����߷��ʡ�
+* **Visitor（抽象访问者）**：抽象类，声明了访问对象结构中不同具体元素的方法，由方法名称可知该方法将访问对象结构中的某个具体元素；
+* **ConcreteVisitor（具体访问者）**：访问某个具体元素的访问者，实现具体的访问方法；
+* **Element（抽象元素）**：抽象类，一般声明一个accept()的方法，用于接受访问者的访问，accept()方法常常以一个抽象访问者的指针作为参数；
+* **ConcreteElement（具体元素）**：针对具体被访问的元素，实现accept()方法；
+* **ObjectStructure（对象结构）**：元素的集合，提供了遍历对象结构中所有元素的方法。对象结构存储了不同类型的元素对象，以供不同的访问者访问。
 
-������ģʽ��UML�ṹͼ���£�
+访问者模式的UML结构图如下：
 
 ![](https://img-blog.csdnimg.cn/20191110175737470.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxMTA3NDMz,size_16,color_FFFFFF,t_70)
 
- ����ͼ��ǰ�����Կ�����**������ģʽ����������νṹ**��
+ 从上图和前述可以看出，**访问者模式中有两个层次结构**：
 
-* **�����ߵĲ�νṹ**����������ߺ;�������ߣ���ͬ�ľ���������в�ͬ�ķ��ʷ�ʽ��visit()��ʽ����
-* **������Ԫ�صĲ�νṹ**������Ԫ�غ;���Ԫ�أ���ͬ�ľ���Ԫ���в�ͬ�ı����ʷ�ʽ��accept()��ʽ��
+* **访问者的层次结构**：抽象访问者和具体访问者，不同的具体访问者有不同的访问方式（visit()方式）；
+* **被访问元素的层次结构**：抽象元素和具体元素，不同的具体元素有不同的被访问方式（accept()方式）
 
-��ʽ��������������νṹ���������µķ�����ʱ�������޸����еĴ��룬ͨ���̳г�������߼���ʵ����չ�����Ͽ���ԭ��ϵͳ��չ�ԽϺá������������µ�Ԫ��ʱ����Ҫ�޸ĳ���������ࣨ���ӷ�������Ԫ�ط���������������Ҫ�޸ľ�������ߣ������µľ���������ࣩ�������Ͽ���ԭ��
+正式由于有这两个层次结构，在增加新的访问者时，不必修改已有的代码，通过继承抽象访问者即可实现扩展，符合开闭原则，系统扩展性较好。但是在增加新的元素时，既要修改抽象访问者类（增加访问新增元素方法的声明），又要修改具体访问者（增加新的具体访问者类），不符合开闭原则。
 
-������ģʽ��ʾ���������£�
+访问者模式的示例代码如下：
 
 ```C++
 #ifndef __DEMO_H__
 #define __DEMO_H__
  
-// ��������� Visitor
+// 抽象访问者 Visitor
 class Visitor
 {
 public:
@@ -67,28 +67,28 @@ public:
 	virtual void visit(ConcreteElementB*) = 0;
 };
  
-// ��������� ConcreteVisitor
+// 具体访问者 ConcreteVisitor
 class ConcreteVisitor :public Visitor
 {
 public:
-	// ʵ��һ������ض�Ԫ�صķ��ʲ���
+	// 实现一种针对特定元素的访问操作
 	void visit(ConcreteElementA*){
-		// Ԫ��A�ķ��ʲ�������
+		// 元素A的访问操作代码
 	}
 	void visit(ConcreteElementB*){
-		// Ԫ��B�ķ��ʲ�������
+		// 元素B的访问操作代码
 	}
 };
  
-// ����Ԫ��
+// 抽象元素
 class Element
 {
 public:
-	// �������󷽷�����һ����������ߵ�ָ����Ϊ��������
+	// 声明抽象方法，以一个抽象访问者的指针作为函数参数
 	virtual void accept(Visitor*) = 0;
 };
  
-// ����Ԫ��
+// 具体元素
 class ConcreteElement :public Element
 {
 public:
@@ -97,13 +97,13 @@ public:
 	}
 };
  
-// ����ṹ
+// 对象结构
 class ObjectStructure
 {
 public:
-	//  �ṩ�ӿڽ��ܷ����߷���
+	//  提供接口接受访问者访问
 	void accept(Visitor* visitor){
-		// �������ʶ���ṹ�е�Ԫ��
+		// 遍历访问对象结构中的元素
 		for (){
 			elementList[i]->accept(visitor);
 		}
@@ -117,21 +117,21 @@ private:
 #endif
 ```
 
-## ������ģʽ����ʵ��
+## 访问者模式代码实例
 
-    Jungle��Ϊһ���˿ͣ�ȥ���й�����빺�ﳵ����Ʒ��������ƻ���������飬
-    ����ʱ����Ա��Ҫ���������Ʒ�ĵļ۸񡣱���Jungle���÷�����ģʽ��ģ��ù��̡�
+    Jungle作为一名顾客，去超市购物，加入购物车的商品包括两种苹果和两本书，
+    结账时收银员需要计算各个商品的的价格。本例Jungle采用访问者模式来模拟该过程。
 
-�����У��ͻ�Jungle������Ա����ȥ������Ʒ�������ĵĵط���ͬ��Jungle���ĵ���ƻ������ĵ��ۡ�Ʒ�Ƶȣ�����Ա��ע������Ʒ�ļ۸���ˣ��ͻ�Customer������ԱCashier�Ǿ�������ߣ���ƻ��Apple����Book�Ǿ��屻����Ԫ�أ������ﳵ���Ƕ���ṹ��������UMLͼ���£�
+本例中，客户Jungle和收银员都会去访问商品，但关心的地方不同：Jungle关心的是苹果和书的单价、品牌等，收银员关注的是商品的价格。因此，客户Customer和收银员Cashier是具体访问者，而苹果Apple和书Book是具体被访问元素；而购物车则是对象结构。本例的UML图如下：
 
 ![](https://img-blog.csdnimg.cn/20191110225041936.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxMTA3NDMz,size_16,color_FFFFFF,t_70)
 
-### Ԫ����
+### 元素类
 
-#### ����Ԫ��
+#### 抽象元素
 
 ```C++
-// ����Ԫ��
+// 抽象元素
 class Element
 {
 public:
@@ -162,10 +162,10 @@ private:
 };
 ```
 
-#### ����Ԫ��Apple
+#### 具体元素Apple
 
 ```C++
-    // ����Ԫ�أ�Apple
+    // 具体元素：Apple
     class Apple :public Element
     {
     public:
@@ -190,10 +190,10 @@ private:
 }
 ```
 
-#### ����Ԫ��Book
+#### 具体元素Book
 
 ```C++
-    // ����Ԫ�أ�Book
+    // 具体元素：Book
     class Book :public Element
     {
     public:
@@ -219,26 +219,26 @@ private:
     }
 ```
 
-### ������
+### 访问者
 
-#### ���������
+#### 抽象访问者
 
 ```C++
-    // ���������
+    // 抽象访问者
     class Visitor
     {
     public:
     	Visitor(){};
-    	// ����һ����ʷ���
+    	// 声明一组访问方法
     	virtual void visit(Apple*) = 0;
     	virtual void visit(Book*) = 0;
     };
 ```
 
-#### ���������Customer
+#### 具体访问者Customer
 
 ```C++
-// ��������ߣ��˿�
+// 具体访问者：顾客
 class Customer :public Visitor
 {
 public:
@@ -269,17 +269,17 @@ void Customer::setNum(Book* book, int iNum){
  
 void Customer::visit(Apple* apple){
 	int price = apple->getPrice();
-	printf("  %s \t����: \t%d Ԫ/kg\n", apple->getName().c_str(), apple->getPrice());
+	printf("  %s \t单价: \t%d 元/kg\n", apple->getName().c_str(), apple->getPrice());
 }
  
 void Customer::visit(Book* book){
 	int price = book->getPrice();
 	string name = book->getName();
-	printf("  ��%s��\t����: \t%d Ԫ/��\n", book->getName().c_str(), book->getPrice());
+	printf("  《%s》\t单价: \t%d 元/本\n", book->getName().c_str(), book->getPrice());
 }
 ```
 
-#### ���������Cashier
+#### 具体访问者Cashier
 
 ```C++
 class Cashier :public Visitor
@@ -299,7 +299,7 @@ void Cashier::visit(Apple* apple){
 	int price = apple->getPrice();
 	int num = apple->getNum();
 	int total = price*num;
-	printf("  %s �ܼۣ� %d Ԫ\n", name.c_str(), total);
+	printf("  %s 总价： %d 元\n", name.c_str(), total);
 }
  
 void Cashier::visit(Book* book){
@@ -307,11 +307,11 @@ void Cashier::visit(Book* book){
 	string name = book->getName();
 	int num = book->getNum();
 	int total = price*num;
-	printf("  ��%s�� �ܼۣ� %d Ԫ\n", name.c_str(), total);
+	printf("  《%s》 总价： %d 元\n", name.c_str(), total);
 }
 ```
 
-### ���ﳵShoppingCart
+### 购物车ShoppingCart
 
 ```C++
 class ShoppingCart
@@ -319,7 +319,7 @@ class ShoppingCart
 public:
 	ShoppingCart(){}
 	void addElement(Element* element){
-		printf("  ��Ʒ����%s, \t������%d, \t���빺�ﳵ�ɹ���\n", element->getName().c_str(), element->getNum());
+		printf("  商品名：%s, \t数量：%d, \t加入购物车成功！\n", element->getName().c_str(), element->getNum());
 		elementList.push_back(element);
 	}
 	void accept(Visitor* visitor){
@@ -332,7 +332,7 @@ private:
 };
 ```
 
-### �ͻ��˴���ʾ�������
+### 客户端代码示例及结果
 
 ```C++
 #include "Element.h"
@@ -342,10 +342,10 @@ private:
  
 int main()
 {
-	Apple *apple1 = new Apple("�츻ʿƻ��", 7);
-	Apple *apple2 = new Apple("��ţƻ��", 5);
-	Book *book1 = new Book("��¥��", 129);
-	Book *book2 = new Book("�ս���", 49);
+	Apple *apple1 = new Apple("红富士苹果", 7);
+	Apple *apple2 = new Apple("花牛苹果", 5);
+	Book *book1 = new Book("红楼梦", 129);
+	Book *book2 = new Book("终结者", 49);
  
 	Cashier* cashier = new Cashier();
 	Customer* jungle = new Customer("Jungle");
@@ -372,21 +372,21 @@ int main()
 }
 ```
 
-## �ܽ�
+## 总结
 
-������ģʽ�Ľṹ��Խϸ��ӣ���ʵ��Ӧ����ʹ��Ƶ�ʽϵ͡����ϵͳ�д���һ�����ӵĶ���ṹ���Ҳ�ͬ�ķ����߶�����в�ͬ�Ĳ�������ô���Կ���ʹ�÷�����ģʽ��������ģʽ���ص��ܽ����£�
+访问者模式的结构相对较复杂，在实际应用中使用频率较低。如果系统中存在一个复杂的对象结构，且不同的访问者对其具有不同的操作，那么可以考虑使用访问者模式。访问者模式的特点总结如下：
 
-### �ŵ㣺
+### 优点：
 
-* �����µķ����ߺܷ��㣬������һ���µľ���������࣬�����µķ��ʷ�ʽ�������޸�ԭ�д��룬���Ͽ���ԭ��
-* ������Ԫ�ؼ�����һ������ṹ�У����ְ������������ڶ���ṹ��Ԫ�ض���ĸ��ã�
+* 增加新的访问者很方便，即增加一个新的具体访问者类，定义新的访问方式，无需修改原有代码，符合开闭原则；
+* 被访问元素集中在一个对象结构中，类的职责更清晰，利于对象结构中元素对象的复用；
 
-### ȱ�㣺
+### 缺点：
 
-* �����µ�Ԫ��������ѣ������µ�Ԫ��ʱ���ڳ��������������Ҫ����һ����������Ԫ�ط�������������Ҫ�޸ĳ�������ߴ��룻���⻹Ҫ�����µľ����������ʵ�ֶ�����Ԫ�صķ��ʣ������Ͽ���ԭ��
-* �ƻ��˶���ķ�װ�ԣ�������ģʽҪ������߶�����ʲ�����ÿһ��Ԫ�ض���Ĳ�������ôԪ�ض�����뱩¶�Լ����ڲ�������״̬������������޷����ʡ�
+* 增加新的元素类很困难，增加新的元素时，在抽象访问者类中需要增加一个对新增的元素方法的声明，即要修改抽象访问者代码；此外还要增加新的具体访问者以实现对新增元素的访问，不符合开闭原则；
+* 破坏了对象的封装性，访问者模式要求访问者对象访问并调用每一个元素对象的操作，那么元素对象必须暴露自己的内部操作和状态，否则访问者无法访问。
 
 
-|[��һƪ](./026_TemplateMethodPattern.md)|[Ŀ¼](./index.md)|[��һƪ]()|
+|[上一篇](./026_TemplateMethodPattern.md)|[目录](./index.md)|[下一篇]()|
 |:---:|:---:|:---:|
-|[ģ�巽��ģʽ](./026_TemplateMethodPattern.md)|[Ŀ¼](./index.md)|[]()|
+|[模板方法模式](./026_TemplateMethodPattern.md)|[目录](./index.md)|[]()|
